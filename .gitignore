@@ -1,0 +1,20 @@
+backend-server/node_modules/
+
+# Server/Client typical ignores
+node_modules/
+.env
+
+/backend-server/addAnalyticsFields.js
+/extra.html
+
+
+
+.env.* 
+dist/
+build/
+
+# OS & IDE files
+.DS_Store
+.vscode/
+*.log
+logs/
