@@ -43,8 +43,8 @@ const NavBar = () => {
     },
     {
       icon: <FaPalette className="text-purple-400" />,
-      text: "Customize Profile",
-      action: () => navigate("/dashboard/appearance"),
+      text: "Dash Board",
+      action: () => navigate("/dashboard"),
     },
     {
       icon: <FaChartLine className="text-purple-400" />,

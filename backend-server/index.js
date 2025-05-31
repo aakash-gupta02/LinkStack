@@ -23,6 +23,7 @@ app.use(cors())
 app.use("/api/auth", authRoutes);
 app.use("/api/link", linkRoutes)
 app.use('/', linkRoutes);
+
 app.use("/", analyicsRiutes)
 app.use('/', profileRoutes);
 // app.use('/api/blogs', blogRoutes);
