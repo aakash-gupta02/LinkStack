@@ -11,7 +11,7 @@ export const getAnalytics = async (userId) => {
     .select('profileViews viewerCountries');
     
   const links = await Link.find({ userId })
-    .select('title url clicks');
+    .select('title url clicks description ');
     
   return {
     profileViews: user.profileViews,
