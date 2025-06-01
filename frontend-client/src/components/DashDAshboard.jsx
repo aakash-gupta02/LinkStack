@@ -4,13 +4,13 @@ import { useAnalytics } from "../context/AnalyticsContext";
 
 const DashDAshboard = () => {
   const {analytics} = useAnalytics()
-  const userData = {
-    name: "Alex Johnson",
-    profileViews: 1248,
-    linkClicks: 3527,
-    totalLinks: 12,
-    conversionRate: "4.2%",
-  };
+  // const userData = {
+  //   name: "Alex Johnson",
+  //   profileViews: 1248,
+  //   linkClicks: 3527,
+  //   totalLinks: 12,
+  //   conversionRate: "4.2%",
+  // };
   return (
     <div>
       <div className="mb-8">
@@ -47,7 +47,8 @@ const DashDAshboard = () => {
           },
           {
             label: "Conversion Rate",
-            value: userData.conversionRate,
+            // value: userData.conversionRate,
+            value: 200,
             icon: "chart-pie",
             color: "green",
             change: "-2% from last week",

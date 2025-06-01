@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
+  
   const [user, setUser] = useState(() => {
     const userData = localStorage.getItem("user");
     return userData ? JSON.parse(userData) : null;

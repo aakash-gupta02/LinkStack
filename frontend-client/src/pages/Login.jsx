@@ -40,10 +40,12 @@ export default function Login() {
       const { token, user } = res.data; // e.g., { token: '...', user: {...} }
 
       login(token, user);
+      
       console.log("apna wala console log :", { token, user });
 
 
       navigate("/"); // Redirect on success
+
     } catch (err) {
 
       console.log(err);

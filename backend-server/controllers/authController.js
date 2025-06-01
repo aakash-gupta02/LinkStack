@@ -227,6 +227,9 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+
+
+
 export const getAllUsers = async (req, res) => {
   try {
     const allUser = await User.find();
