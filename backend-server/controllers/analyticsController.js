@@ -26,10 +26,10 @@ const router = express.Router()
 export const getAnalytics = async (userId) => {
   
   const user = await User.findById(userId)
-    .select('name username email profilePicture bio socialLinks profileViews viewerCountries lastLogin isAdmin');
+    .select('name username email profilePicture bio socialLinks profileViews viewerCountries _id lastLogin isAdmin');
     
   const links = await Link.find({ userId })
-    .select('title url clicks description thumbnailUrl icon isVisible order createdAt');
+    .select('title url clicks description thumbnailUrl icon isVisible order createdAt _id ');
     
   return {
     user: {
@@ -40,7 +40,8 @@ export const getAnalytics = async (userId) => {
       bio: user.bio,
       socialLinks: user.socialLinks,
       lastLogin: user.lastLogin,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      id: user._id
     },
     analytics: {
       profileViews: user.profileViews,
@@ -57,7 +58,9 @@ export const getAnalytics = async (userId) => {
       icon: link.icon,
       isVisible: link.isVisible,
       order: link.order,
-      createdAt: link.createdAt
+      createdAt: link.createdAt,
+      id: link._id
+
     }))
   };
 };

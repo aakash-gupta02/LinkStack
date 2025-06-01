@@ -33,10 +33,10 @@ export const deleteLink = async (req, res) => {
       return res.status(400).json({ message: "You are not authorized " });
     }
 
-    // const deletedLink = await link.findByIdAndDelete(id);
-    // res.status(200).json({ message: "Deleted successfully", deletedLink });
+    const deletedLink = await link.findByIdAndDelete(id);
+    res.status(200).json({ message: "Deleted successfully", deletedLink });
 
-    res.status(200).json({ message: "Deleted successfully", findLink });
+    // res.status(200).json({ message: "Deleted successfully", findLink });
   } catch (error) {
     res.status(500).json({ message: "Error deleting link" });
     console.log(error);

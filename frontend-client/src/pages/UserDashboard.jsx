@@ -140,10 +140,7 @@ const UserDashboard = () => {
             <span>Home</span>
           </button>
 
-          <button className="flex items-center px-4 py-2 w-full text-left text-red-600 rounded-lg hover:bg-red-50 cursor-pointer whitespace-nowrap">
-            <i className="fas fa-sign-out-alt mr-3"></i>
-            <span>Logout</span>
-          </button>
+         
         </div>
       </div>
 
