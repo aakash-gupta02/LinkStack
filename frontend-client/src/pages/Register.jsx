@@ -46,7 +46,6 @@ export default function RegisterPage() {
           if (err.response && err.response.data) {
 
 
-// xcxcxccc
 
             const { message } = err.response.data;
             if (message === "Username already taken") {
@@ -88,30 +87,40 @@ export default function RegisterPage() {
 //     }
 //   };
 
-  return (
-    <div className="min-h-screen flex bg-white">
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
-        <h1 className="text-3xl font-bold mb-4 text-black">Welcome to LinkStack!</h1>
-        <p className="text-gray-600 mb-4">Choose your LinkStack username. You can always change it later.</p>
+return (
+  <div className="min-h-screen flex bg-white">
+    {/* Left Section - Form */}
+    <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
+      <div className="w-full max-w-md space-y-6">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900">Create your LinkStack</h1>
+          <p className="text-gray-500">Connect all your important links in one place.</p>
+        </div>
 
+        {/* Error Messages */}
+        {usernameError && (
+          <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
+            {usernameError}
+          </div>
+        )}
+        {generalError && (
+          <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
+            {generalError}
+          </div>
+        )}
 
-     {usernameError && (
-              <p className="text-red-500 text-sm mb-4">{usernameError}</p>
-            )}
-            {generalError && (
-              <p className="text-red-500 text-sm mb-4">{generalError}</p>
-            )}
-
-        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
           <input
             type="text"
             name="name"
             placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md bg-gray-100"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             required
           />
+
           <div>
             <input
               type="text"
@@ -119,22 +128,24 @@ export default function RegisterPage() {
               placeholder="linkstack.me/username"
               value={formData.username}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md bg-gray-100 ${usernameTaken ? 'border-red-500' : ''}`}
+              className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-indigo-600 focus:border-transparent ${usernameTaken ? 'border-red-500' : 'border-gray-200'}`}
               required
             />
             {usernameTaken && (
               <p className="text-sm text-red-500 mt-1">Username is already taken.</p>
             )}
           </div>
+
           <input
             type="email"
             name="email"
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-md bg-gray-100"
+            className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
             required
           />
+
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -142,46 +153,52 @@ export default function RegisterPage() {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md bg-gray-100"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-50 focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
               required
             />
             <button
               type="button"
-              className="absolute right-3 top-2 text-sm text-indigo-600"
+              className="absolute right-3 top-3.5 text-sm text-indigo-600 hover:text-indigo-800"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show"}
             </button>
           </div>
+
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+            className="w-full py-3 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-medium flex justify-center items-center"
           >
             {loading ? "Creating..." : "Continue"}
           </button>
+
+          {/* Login Link */}
+          <p className="text-center text-sm text-gray-600">
+            Already have an account?{" "}
+            <a href="/login" className="text-indigo-600 hover:underline">
+              Login
+            </a>
+          </p>
         </form>
       </div>
+    </div>
 
-      <div className="hidden md:flex md:w-1/2 items-center justify-center bg-purple-800 relative">
-        {/* Right Side Mockup Preview */}
-        <div className="absolute bottom-12 right-12 flex gap-4">
-          <div className="bg-black w-10 h-10 rounded-full"></div>
-          <div className="bg-black w-10 h-10 rounded-full"></div>
-          <div className="bg-black w-10 h-10 rounded-full"></div>
-        </div>
-        <div className="bg-purple-700 p-6 rounded-xl text-white max-w-xs">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-10 h-10 bg-white rounded-full" />
-            <span className="text-sm">/superwintendo</span>
-          </div>
-          <h2 className="text-lg font-bold">Super Wintendo</h2>
-          <p className="text-sm mb-4">Streaming every Tuesday</p>
-          <button className="bg-purple-600 w-full py-2 mb-2 rounded">Watch now on Twitch</button>
-          <button className="bg-purple-600 w-full py-2 mb-2 rounded">Join my Discord</button>
-          <button className="bg-purple-600 w-full py-2 rounded">Playlists</button>
-        </div>
+    {/* Right Section - Illustration */}
+    <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-indigo-700 to-purple-900 items-center justify-center p-12">
+      <div className="max-w-md text-center text-white space-y-6">
+        <h2 className="text-4xl font-bold">Build your digital identity</h2>
+        <p className="text-lg opacity-90">
+          Share all your links, social profiles, and more – all in one place.
+        </p>
+        <img
+          src="https://illustrations.popsy.co/gray/web-design.svg"
+          alt="LinkStack illustration"
+          className="w-full mt-6 rounded-xl shadow-2xl"
+        />
       </div>
     </div>
-  );
+  </div>
+);
+
 }

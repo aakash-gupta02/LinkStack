@@ -14,69 +14,6 @@ const UserDashboard = () => {
   
   const { user} = useAnalytics();
 
-  // Dummy data
-  const userData = {
-    name: "Alex Johnson",
-    profileViews: 1248,
-    linkClicks: 3527,
-    totalLinks: 12,
-    conversionRate: "4.2%",
-  };
-
-  // // Initialize chart
-  // useEffect(() => {
-  //   const chartDom = document.getElementById("analytics-chart");
-  //   if (chartDom) {
-  //     const myChart = echarts.init(chartDom);
-  //     const option = {
-  //       animation: false,
-  //       tooltip: { trigger: "axis" },
-  //       grid: {
-  //         left: "3%",
-  //         right: "4%",
-  //         bottom: "3%",
-  //         containLabel: true,
-  //       },
-  //       xAxis: {
-  //         type: "category",
-  //         boundaryGap: false,
-  //         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  //       },
-  //       yAxis: { type: "value" },
-  //       series: [
-  //         {
-  //           name: "Link Clicks",
-  //           type: "line",
-  //           data: [120, 132, 101, 134, 90, 230, 210],
-  //           smooth: true,
-  //           lineStyle: { color: "#6366f1" },
-  //           areaStyle: {
-  //             color: {
-  //               type: "linear",
-  //               x: 0,
-  //               y: 0,
-  //               x2: 0,
-  //               y2: 1,
-  //               colorStops: [
-  //                 { offset: 0, color: "rgba(99, 102, 241, 0.3)" },
-  //                 { offset: 1, color: "rgba(99, 102, 241, 0.05)" },
-  //               ],
-  //             },
-  //           },
-  //         },
-  //       ],
-  //     };
-  //     myChart.setOption(option);
-
-  //     const handleResize = () => myChart.resize();
-  //     window.addEventListener("resize", handleResize);
-
-  //     return () => {
-  //       window.removeEventListener("resize", handleResize);
-  //       myChart.dispose();
-  //     };
-  //   }
-  // }, []);
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -85,7 +22,11 @@ const UserDashboard = () => {
       {/* Sidebar */}
       <div className="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full">
         <div className="h-16 flex items-center px-6 border-b border-gray-200">
-          <h1 className="text-xl font-bold text-indigo-600">LinkStack</h1>
+          <h1 onClick={()=>{
+            naviagte("/")
+          }}
+          
+          className="text-xl font-bold text-indigo-600 cursor-pointer ">LinkStack</h1>
         </div>
         <div className="flex-1 overflow-y-auto py-4">
           <nav className="px-4 space-y-1">

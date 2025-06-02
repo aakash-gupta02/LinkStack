@@ -27,32 +27,32 @@ const NavBar = () => {
 
   const profileLinks = [
     {
-      icon: <FaUser className="text-purple-400" />,
+      icon: <FaUser className="text-indigo-500" />,
       text: "My Profile",
       action: () => navigate(`/${user?.username}`),
     },
     {
-      icon: <FaPlus className="text-purple-400" />,
+      icon: <FaPlus className="text-indigo-500" />,
       text: "Create New Link",
       action: () => navigate("/dashboard/links/new"),
     },
     {
-      icon: <FaLink className="text-purple-400" />,
+      icon: <FaLink className="text-indigo-500" />,
       text: "View My Links",
       action: () => navigate("/dashboard/links"),
     },
     {
-      icon: <FaPalette className="text-purple-400" />,
+      icon: <FaPalette className="text-indigo-500" />,
       text: "Dash Board",
       action: () => navigate("/dashboard"),
     },
     {
-      icon: <FaChartLine className="text-purple-400" />,
+      icon: <FaChartLine className="text-indigo-500" />,
       text: "Analytics",
       action: () => navigate("/dashboard/analytics"),
     },
     {
-      icon: <FaCog className="text-purple-400" />,
+      icon: <FaCog className="text-indigo-500" />,
       text: "Settings",
       action: () => navigate("/dashboard/settings"),
     },
@@ -116,16 +116,28 @@ const NavBar = () => {
             {/* Profile Modal */}
 
             {isProfileOpen && (
-              <div className="absolute right-0 top-8 mt-2 w-72 bg-white rounded-xl shadow-2xl z-50 py-3 text-gray-800 transform transition-all duration-300 ease-in-out scale-95 hover:scale-100">
-                {/* Header Section */}
-                {/* <div className="flex justify-between items-center px-5 py-3 border-b border-indigo-100">
-                <h3 className="font-semibold text-indigo-800 text-lg">My Account</h3>
-                <button onClick={toggleProfileModal}>
-                  <FiX className="text-indigo-500 hover:text-indigo-700 transition-colors" size={20} />
-                </button>
-              </div> */}
+              <div className="absolute right-0 top-12 mt-1 w-64 bg-white border border-indigo-100 rounded-xl shadow-lg z-50 overflow-hidden">
+                {/* Pointer/Arrow */}
+                <div className="absolute -top-2 right-4 w-3 h-3 bg-white border-l border-t border-indigo-100 transform rotate-45 z-[-1]" />
 
-                {/* Profile Links Section */}
+                {/* Profile Section */}
+                <div className="px-4 py-3 border-b border-indigo-100">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={user.photo || "/default-avatar.png"}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full object-cover border border-indigo-300"
+                    />
+                    <div>
+                      <p className="font-medium text-sm text-gray-800">
+                        {user.name || "User"}
+                      </p>
+                      <p className="text-xs text-gray-500">@{user.username}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Links */}
                 <div className="py-2">
                   {profileLinks.map((link, index) => (
                     <button
@@ -144,14 +156,14 @@ const NavBar = () => {
                   ))}
                 </div>
 
-                {/* Logout Section */}
-                <div className="border-t border-indigo-100 py-2">
+                {/* Logout */}
+                <div className="border-t border-indigo-100">
                   <button
                     onClick={handleLogout}
-                    className="flex items-center w-full px-5 py-3 text-left hover:bg-indigo-50 transition-colors duration-200 text-red-500"
+                    className="flex items-center w-full px-5 py-3 text-left hover:bg-indigo-50 transition-colors duration-200"
                   >
-                    <FaSignOutAlt className="mr-3" size={18} />
-                    <span className="font-medium">Logout</span>
+                    <FaSignOutAlt className="mr-3 text-red-500" />
+                    <span className="font-medium text-red-500">Logout</span>
                   </button>
                 </div>
               </div>

@@ -32,7 +32,6 @@ const ProfileDashboard = () => {
 
   const { user: currentUser, token, updateUser } = useAuth();
 
-  console.log(currentUser);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -76,6 +75,7 @@ const ProfileDashboard = () => {
         };
 
         updateUser(selectedFields);
+        
       }
     } catch (err) {
       console.log(err);
