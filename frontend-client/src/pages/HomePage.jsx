@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/NavBar';
+import Hero from '../components/Hero';
 
 const Home = () => {
   const [email, setEmail] = useState('');
@@ -7,6 +8,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-600 text-white font-sans">
 
+{/* <Hero/> */}
       {/* Navigation */}
       {/* <nav className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         <div className="flex items-center">
