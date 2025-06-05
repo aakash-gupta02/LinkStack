@@ -4,6 +4,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css');
 
+
+/* :root {
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --text: #1e293b;
+} */
+
+:root {
+  /* Base colors */
+  --bg-page: #f9fafb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #4b5563;
+  
+  /* Header */
+  --header-gradient-start: #6366f1;
+  --header-gradient-end: #8b5cf6;
+  
+  /* Profile */
+  --profile-border: #ffffff;
+  --profile-bg: #ffffff;
+  
+  /* Social Icons */
+  --social-bg: #ffffff;
+  --social-default: #6b7280;
+  --social-github: #181717;
+  --social-linkedin: #0a66c2;
+  --social-twitter: #1da1f2;
+  --social-youtube: #ff0000;
+  --social-instagram: #e4405f;
+  --social-facebook: #1877f2;
+  
+  /* Link Cards */
+  --link-card-bg: #ffffff;
+  --link-card-text: #111827;
+  --link-card-text-secondary: #6b7280;
+  --link-card-icon: #8b5cf6;
+  --link-card-radius: 12px;
+  --link-thumbnail-bg: #f3f4f6;
+  
+  /* Footer */
+  --footer-text: #9ca3af;
+}
+
+
+
 /* Base styles */
 body {
   font-family: 'Inter', sans-serif;

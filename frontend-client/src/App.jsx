@@ -8,6 +8,7 @@ import RegisterPage from "./pages/Register";
 import Login from "./pages/Login";
 import UserDashboard from "./pages/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute"; // Adjust path accordingly
+import Link2 from "./pages/Link2";
 
 const App = () => {
 
@@ -27,6 +28,7 @@ return (
           </ProtectedRoute>
         }
       />
+      <Route path="/link2/:username" element={<Link2/>} />
 
       <Route path="/:username" element={<ProfilePage />} />
     </Routes>
