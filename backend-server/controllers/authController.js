@@ -95,42 +95,6 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// export const updateUser = async (req, res) => {
-//   const userId = req.params.id;
-
-//   try {
-//     // Only allow if user is updating their own account
-//     if (req.user.id !== userId) {
-//       return res.status(403).json({ message: "Unauthorized action" });
-//     }
-
-//     const userExists = await User.findOne({ username: req.body.username });
-
-//     if (userExists) {
-//       return res.status(400).json({ message: "Username already Taken" });
-//     }
-
-//     const updatedFields = {
-//       name: req.body.name,
-//       username: req.body.username,
-//       bio: req.body.bio,
-//       profilePic: req.body.profilePic,
-//       socialLinks: req.body.socialLinks,
-//     };
-
-//     const updatedUser = await User.findByIdAndUpdate(
-//       userId,
-//       { $set: updatedFields },
-//       { new: true, runValidators: true }
-//     ).select("-password"); // exclude password from response
-
-//     res.status(200).json({ message: "User updated", user: updatedUser });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server error updating user" });
-//   }
-// };
-
 export const updateUser = async (req, res) => {
   try {
     const userId = req.user._id; // Assuming you have auth middleware setting req.user
@@ -201,6 +165,53 @@ export const updateUser = async (req, res) => {
     });
   }
 };
+
+export const updateUserTheme = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { theme } = req.body;
+
+    if (!theme || typeof theme !== 'object') {
+      return res.status(400).json({ message: "Invalid or missing theme object" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: { theme } },
+      {
+        new: true,
+        runValidators: true,
+        select: '-password -__v'
+      }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Theme updated successfully",
+      user: updatedUser
+    });
+
+  } catch (err) {
+    console.error('Theme update error:', err);
+
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({
+        success: false,
+        message: Object.values(err.errors).map(val => val.message)[0]
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: "Server error during theme update"
+    });
+  }
+};
+
 
 
 export const deleteUser = async (req, res) => {

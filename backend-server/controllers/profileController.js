@@ -23,6 +23,8 @@ export const getUserProfile = async (req, res) => {
       .sort({ position: 1 }) // Sort by position if you have ordering
       .lean();
 
+      
+
     // 3. Return combined profile data
     res.status(200).json({
       success: true,
