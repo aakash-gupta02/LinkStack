@@ -26,7 +26,7 @@ const router = express.Router()
 export const getAnalytics = async (userId) => {
   
   const user = await User.findById(userId)
-    .select('name username email profilePicture bio socialLinks profileViews viewerCountries _id lastLogin isAdmin');
+    .select('name username email profilePicture theme bio socialLinks profileViews viewerCountries _id lastLogin isAdmin');
     
   const links = await Link.find({ userId })
     .select('title url clicks description thumbnailUrl icon isVisible order createdAt _id ');
@@ -41,6 +41,7 @@ export const getAnalytics = async (userId) => {
       socialLinks: user.socialLinks,
       lastLogin: user.lastLogin,
       isAdmin: user.isAdmin,
+      theme:user.theme,
       id: user._id
     },
     analytics: {
