@@ -3,7 +3,6 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useAnalytics } from "../context/AnalyticsContext";
 
-// Add preset themes array at the top level
 const presetThemes = [
   {
     name: "Minimal",
@@ -31,7 +30,7 @@ const presetThemes = [
       linkCardRadius: "12px",
       linkThumbnailBg: "#f3f4f6",
       footerText: "#9ca3af",
-    }
+    },
   },
   {
     name: "Midnight",
@@ -59,7 +58,7 @@ const presetThemes = [
       linkCardRadius: "12px",
       linkThumbnailBg: "#334155",
       footerText: "#64748b",
-    }
+    },
   },
   {
     name: "Emerald",
@@ -87,7 +86,7 @@ const presetThemes = [
       linkCardRadius: "12px",
       linkThumbnailBg: "#6ee7b7",
       footerText: "#047857",
-    }
+    },
   },
   {
     name: "Sunset",
@@ -115,7 +114,7 @@ const presetThemes = [
       linkCardRadius: "12px",
       linkThumbnailBg: "#fca5a5",
       footerText: "#b91c1c",
-    }
+    },
   },
   {
     name: "Ocean",
@@ -143,19 +142,24 @@ const presetThemes = [
       linkCardRadius: "12px",
       linkThumbnailBg: "#7dd3fc",
       footerText: "#0c4a6e",
-    }
+    },
   },
   {
     name: "Custom",
-    theme: null
-  }
+    theme: null,
+  },
 ];
 
 const ThemeDashboard = () => {
+
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [customTheme, setCustomTheme] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [activeThemeIndex, setActiveThemeIndex] = useState(presetThemes.length - 1); // Default to Custom
+
+
+  const [activeThemeIndex, setActiveThemeIndex] = useState(
+    presetThemes.length - 1
+  ); // Default to Custom
   const [initialThemeSet, setInitialThemeSet] = useState(false);
 
   const { user, links, analytics } = useAnalytics();
@@ -164,11 +168,12 @@ const ThemeDashboard = () => {
   // Initialize with user's theme
   useEffect(() => {
     if (currentUser?.theme && !initialThemeSet) {
-      // Check if user's theme matches any preset
-      const matchingIndex = presetThemes.findIndex(preset => 
-        preset.theme && JSON.stringify(preset.theme) === JSON.stringify(currentUser.theme)
+      const matchingIndex = presetThemes.findIndex(
+        (preset) =>
+          preset.theme &&
+          JSON.stringify(preset.theme) === JSON.stringify(currentUser.theme)
       );
-      
+
       if (matchingIndex >= 0) {
         setActiveThemeIndex(matchingIndex);
         setSelectedTheme(presetThemes[matchingIndex].theme);
@@ -181,12 +186,18 @@ const ThemeDashboard = () => {
     }
   }, [currentUser, initialThemeSet]);
 
-  // Apply the selected theme to preview
-  useEffect(() => {
-    if (selectedTheme) {
-      applyPreviewTheme(selectedTheme);
-    }
-  }, [selectedTheme]);
+  // // Apply the selected theme to preview
+  // useEffect(() => {
+
+  //   if (customTheme) {
+  //     applyPreviewTheme(customTheme);
+  //   }
+
+  //   if (selectedTheme) {
+  //     applyPreviewTheme(selectedTheme);
+  //   }
+
+  // }, [selectedTheme, customTheme]);
 
   const applyPreviewTheme = (theme) => {
     const root = document.getElementById("theme-preview");
@@ -197,45 +208,123 @@ const ThemeDashboard = () => {
     });
   };
 
-  const handleThemeSelect = (theme, index) => {
-    setActiveThemeIndex(index);
-    if (theme.name === "Custom") {
-      setSelectedTheme(customTheme);
-    } else {
-      setSelectedTheme(theme.theme);
-    }
-  };
+  // const handleThemeSelect = (theme, index) => {
+  //   setActiveThemeIndex(index);
+  //   if (theme.name === "Custom") {
+  //     setSelectedTheme(customTheme);
+  //   } else {
+  //     setSelectedTheme(theme.theme);
+  //   }
+  // };
 
-  const handleSaveTheme = async () => {
-    if (!selectedTheme) return;
+  // const handleSaveTheme = async () => {
+  //   if (!selectedTheme) return;
 
-    setIsLoading(true);
-    try {
-      const response = await axios.patch(
-        `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
-        { theme: selectedTheme },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      
-      // Update user context with new theme
-      updateUser({ ...currentUser, theme: selectedTheme });
-      alert("Theme saved successfully!");
-    } catch (error) {
-      console.error("Error saving theme:", error);
-      alert("Failed to save theme");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.patch(
+  //       `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
+  //       { theme: selectedTheme },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     // Update user context with new theme
+  //     updateUser({ ...currentUser, theme: selectedTheme });
+  //     alert("Theme saved successfully!");
+  //   } catch (error) {
+  //     console.error("Error saving theme:", error);
+  //     alert("Failed to save theme");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   // Check if a theme is the user's current theme
+  
+
+  // Update the handleThemeSelect function
+const handleThemeSelect = (theme, index) => {
+  setActiveThemeIndex(index);
+  if (theme.name === "Custom") {
+    // When selecting Custom, use the customTheme state (which contains your color selections)
+    setSelectedTheme({
+      ...customTheme,
+      // Include all theme properties with customTheme values or fallbacks
+      bgPage: customTheme.bgPage || currentUser?.theme?.bgPage || "#ffffff",
+      headerGradientStart: customTheme.headerGradientStart || currentUser?.theme?.headerGradientStart || "#6366f1",
+      headerGradientEnd: customTheme.headerGradientEnd || currentUser?.theme?.headerGradientEnd || "#8b5cf6",
+      // Include all other theme properties...
+      linkCardBg: customTheme.linkCardBg || currentUser?.theme?.linkCardBg || "#ffffff",
+      // Add all other theme properties here
+    });
+  } else {
+    // For preset themes, use the theme object directly
+    setSelectedTheme(theme.theme);
+  }
+};
+
+// Update the useEffect for applying preview
+useEffect(() => {
+  if (activeThemeIndex === presetThemes.length - 1 && customTheme) {
+    // When custom theme is active, apply customTheme
+    applyPreviewTheme(customTheme);
+  } else if (selectedTheme) {
+    // Otherwise apply selectedTheme
+    applyPreviewTheme(selectedTheme);
+  }
+}, [selectedTheme, customTheme, activeThemeIndex]);
+
+// Update the handleSaveTheme function
+const handleSaveTheme = async () => {
+  let themeToSave;
+  
+  if (activeThemeIndex === presetThemes.length - 1) {
+    // If custom theme is selected, use customTheme
+    themeToSave = customTheme;
+  } else {
+    // Otherwise use selectedTheme
+    themeToSave = selectedTheme;
+  }
+
+  if (!themeToSave) return;
+
+  setIsLoading(true);
+  try {
+    const response = await axios.patch(
+      `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
+      { theme: themeToSave },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    // Update user context with new theme
+    updateUser({ ...currentUser, theme: themeToSave });
+    alert("Theme saved successfully!");
+  } catch (error) {
+    console.error("Error saving theme:", error);
+    alert("Failed to save theme");
+  } finally {
+    setIsLoading(false);
+  }
+};
+  
+
+
+  
   const isCurrentTheme = (theme) => {
-    return currentUser?.theme && JSON.stringify(theme) === JSON.stringify(currentUser.theme);
+    return (
+      currentUser?.theme &&
+      JSON.stringify(theme) === JSON.stringify(currentUser.theme)
+    );
   };
 
   return (
@@ -258,7 +347,7 @@ const ThemeDashboard = () => {
               {presetThemes.map((theme, index) => {
                 const isActive = activeThemeIndex === index;
                 const isCurrent = theme.theme && isCurrentTheme(theme.theme);
-                
+
                 return (
                   <div
                     key={index}
@@ -266,8 +355,8 @@ const ThemeDashboard = () => {
                       isActive
                         ? "border-indigo-600 ring-2 ring-indigo-100"
                         : isCurrent
-                          ? "border-green-500 ring-2 ring-green-100"
-                          : "border-gray-200 hover:border-indigo-300"
+                        ? "border-green-500 ring-2 ring-green-100"
+                        : "border-gray-200 hover:border-indigo-300"
                     }`}
                     onClick={() => handleThemeSelect(theme, index)}
                   >
@@ -275,7 +364,9 @@ const ThemeDashboard = () => {
                       <h3 className="font-medium text-gray-800">
                         {theme.name}
                         {isCurrent && !isActive && (
-                          <span className="ml-2 text-xs text-green-600">(Current)</span>
+                          <span className="ml-2 text-xs text-green-600">
+                            (Current)
+                          </span>
                         )}
                       </h3>
                       {isActive && (
@@ -290,7 +381,9 @@ const ThemeDashboard = () => {
                     >
                       {isCurrent && !isActive && (
                         <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                          <span className="text-white text-sm font-medium">Current Theme</span>
+                          <span className="text-white text-sm font-medium">
+                            Current Theme
+                          </span>
                         </div>
                       )}
                       <div
@@ -298,15 +391,17 @@ const ThemeDashboard = () => {
                         style={{
                           background: theme.theme
                             ? `linear-gradient(to right, ${theme.theme.headerGradientStart}, ${theme.theme.headerGradientEnd})`
-                            : "#d1d5db"
+                            : "#d1d5db",
                         }}
                       ></div>
                       <div className="flex justify-center mt-2">
                         <div
                           className="w-12 h-12 rounded-full"
                           style={{
-                            backgroundColor: theme.theme?.profileBg || "#e5e7eb",
-                            borderColor: theme.theme?.profileBorder || "#f3f4f6",
+                            backgroundColor:
+                              theme.theme?.profileBg || "#e5e7eb",
+                            borderColor:
+                              theme.theme?.profileBorder || "#f3f4f6",
                             borderWidth: "4px",
                           }}
                         ></div>
@@ -328,7 +423,11 @@ const ThemeDashboard = () => {
                   <h3 className="font-medium text-gray-700 mb-3">Background</h3>
                   <input
                     type="color"
-                    value={customTheme.bgPage || currentUser?.theme?.bgPage || "#ffffff"}
+                    value={
+                      customTheme.bgPage ||
+                      currentUser?.theme?.bgPage ||
+                      "#ffffff"
+                    }
                     onChange={(e) =>
                       setCustomTheme({ ...customTheme, bgPage: e.target.value })
                     }
@@ -341,7 +440,11 @@ const ThemeDashboard = () => {
                   </h3>
                   <input
                     type="color"
-                    value={customTheme.headerGradientStart || currentUser?.theme?.headerGradientStart || "#6366f1"}
+                    value={
+                      customTheme.headerGradientStart ||
+                      currentUser?.theme?.headerGradientStart ||
+                      "#6366f1"
+                    }
                     onChange={(e) =>
                       setCustomTheme({
                         ...customTheme,
@@ -357,7 +460,11 @@ const ThemeDashboard = () => {
                   </h3>
                   <input
                     type="color"
-                    value={customTheme.headerGradientEnd || currentUser?.theme?.headerGradientEnd || "#8b5cf6"}
+                    value={
+                      customTheme.headerGradientEnd ||
+                      currentUser?.theme?.headerGradientEnd ||
+                      "#8b5cf6"
+                    }
                     onChange={(e) =>
                       setCustomTheme({
                         ...customTheme,
@@ -373,7 +480,11 @@ const ThemeDashboard = () => {
                   </h3>
                   <input
                     type="color"
-                    value={customTheme.linkCardBg || currentUser?.theme?.linkCardBg || "#ffffff"}
+                    value={
+                      customTheme.linkCardBg ||
+                      currentUser?.theme?.linkCardBg ||
+                      "#ffffff"
+                    }
                     onChange={(e) =>
                       setCustomTheme({
                         ...customTheme,
@@ -403,18 +514,27 @@ const ThemeDashboard = () => {
             <h2 className="text-xl font-bold text-gray-800 mb-6">Preview</h2>
             <div className="mb-4 p-3 bg-gray-100 rounded-lg">
               <p className="text-sm text-gray-700">
-                {currentUser?.theme 
-                  ? `Previewing ${activeThemeIndex === presetThemes.length - 1 ? "custom" : presetThemes[activeThemeIndex].name} theme`
+                {currentUser?.theme
+                  ? `Previewing ${
+                      activeThemeIndex === presetThemes.length - 1
+                        ? "custom"
+                        : presetThemes[activeThemeIndex].name
+                    } theme`
                   : "No theme set yet"}
               </p>
               {currentUser?.theme && (
-                <button 
+                <button
                   className="mt-2 text-sm text-indigo-600 hover:underline"
                   onClick={() => {
                     setSelectedTheme(currentUser.theme);
-                    setActiveThemeIndex(presetThemes.findIndex(preset => 
-                      preset.theme && JSON.stringify(preset.theme) === JSON.stringify(currentUser.theme)
-                    ));
+                    setActiveThemeIndex(
+                      presetThemes.findIndex(
+                        (preset) =>
+                          preset.theme &&
+                          JSON.stringify(preset.theme) ===
+                            JSON.stringify(currentUser.theme)
+                      )
+                    );
                   }}
                 >
                   Revert to current theme
