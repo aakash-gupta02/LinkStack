@@ -6,27 +6,29 @@ import ThemeDashboard from "../components/ThemeDashboard";
 import AnalyticsDashboard from "../components/AnalyticsDashboard";
 import { Link, useNavigate } from "react-router-dom";
 import { useAnalytics } from "../context/AnalyticsContext";
+import LayoutCustomizer from "../components/LayoutCustomizer";
+import SupportPage from "../components/SupportPage";
 
 const UserDashboard = () => {
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const naviagte = useNavigate();
-  
-  const { user} = useAnalytics();
 
+  const { user } = useAnalytics();
 
   return (
     <div className="flex h-screen bg-gray-50">
-
-
       {/* Sidebar */}
       <div className="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full">
         <div className="h-16 flex items-center px-6 border-b border-gray-200">
-          <h1 onClick={()=>{
-            naviagte("/")
-          }}
-          
-          className="text-xl font-bold text-indigo-600 cursor-pointer ">LinkStack</h1>
+          <h1
+            onClick={() => {
+              naviagte("/");
+            }}
+            className="text-xl font-bold text-indigo-600 cursor-pointer "
+          >
+            LinkStack
+          </h1>
         </div>
         <div className="flex-1 overflow-y-auto py-4">
           <nav className="px-4 space-y-1">
@@ -35,6 +37,7 @@ const UserDashboard = () => {
               "profile",
               "links",
               "theme",
+              "layout",
               "analytics",
               "support",
             ].map((menu) => (
@@ -57,6 +60,8 @@ const UserDashboard = () => {
                       ? "link"
                       : menu === "theme"
                       ? "paint-brush"
+                      : menu === "layout"
+                      ? "box"
                       : menu === "analytics"
                       ? "chart-line"
                       : "question-circle"
@@ -80,14 +85,11 @@ const UserDashboard = () => {
             <i className="fas fa-home mr-3"></i>
             <span>Home</span>
           </button>
-
-         
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 ml-64 flex flex-col min-h-screen">
-
         {/* Top Navbar */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-10">
           <div>
@@ -136,7 +138,6 @@ const UserDashboard = () => {
           </div>
         </header>
 
-
         {/* Dashboard Content */}
         <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
           {activeMenu === "dashboard" && <DashDAshboard />}
@@ -148,6 +149,10 @@ const UserDashboard = () => {
           {activeMenu === "analytics" && <AnalyticsDashboard />}
 
           {activeMenu === "theme" && <ThemeDashboard />}
+
+          {activeMenu === "layout" && <LayoutCustomizer />}
+
+          {activeMenu == "support" && <SupportPage />}
         </main>
       </div>
     </div>

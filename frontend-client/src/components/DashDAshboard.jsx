@@ -3,13 +3,7 @@ import { useAnalytics } from "../context/AnalyticsContext";
 
 const DashDAshboard = () => {
   const { analytics } = useAnalytics();
-  // const userData = {
-  //   name: "Alex Johnson",
-  //   profileViews: 1248,
-  //   linkClicks: 3527,
-  //   totalLinks: 12,
-  //   conversionRate: "4.2%",
-  // };
+
   return (
     <div>
       <div className="mb-8">

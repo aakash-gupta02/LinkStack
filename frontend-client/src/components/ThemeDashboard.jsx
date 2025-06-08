@@ -2,160 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useAnalytics } from "../context/AnalyticsContext";
-
-const presetThemes = [
-  {
-    name: "Minimal",
-    theme: {
-      bgPage: "#ffffff",
-      textPrimary: "#111827",
-      textSecondary: "#6b7280",
-      textTertiary: "#4b5563",
-      headerGradientStart: "#6366f1",
-      headerGradientEnd: "#8b5cf6",
-      profileBorder: "#ffffff",
-      profileBg: "#ffffff",
-      socialBg: "#ffffff",
-      socialDefault: "#6b7280",
-      socialGithub: "#181717",
-      socialLinkedin: "#0a66c2",
-      socialTwitter: "#1da1f2",
-      socialYoutube: "#ff0000",
-      socialInstagram: "#e4405f",
-      socialFacebook: "#1877f2",
-      linkCardBg: "#ffffff",
-      linkCardText: "#111827",
-      linkCardTextSecondary: "#6b7280",
-      linkCardIcon: "#8b5cf6",
-      linkCardRadius: "12px",
-      linkThumbnailBg: "#f3f4f6",
-      footerText: "#9ca3af",
-    },
-  },
-  {
-    name: "Midnight",
-    theme: {
-      bgPage: "#0f172a",
-      textPrimary: "#f1f5f9",
-      textSecondary: "#cbd5e1",
-      textTertiary: "#94a3b8",
-      headerGradientStart: "#334155",
-      headerGradientEnd: "#1e293b",
-      profileBorder: "#1e293b",
-      profileBg: "#334155",
-      socialBg: "#1e293b",
-      socialDefault: "#94a3b8",
-      socialGithub: "#f1f5f9",
-      socialLinkedin: "#7dd3fc",
-      socialTwitter: "#38bdf8",
-      socialYoutube: "#f87171",
-      socialInstagram: "#f472b6",
-      socialFacebook: "#60a5fa",
-      linkCardBg: "#1e293b",
-      linkCardText: "#f1f5f9",
-      linkCardTextSecondary: "#cbd5e1",
-      linkCardIcon: "#7dd3fc",
-      linkCardRadius: "12px",
-      linkThumbnailBg: "#334155",
-      footerText: "#64748b",
-    },
-  },
-  {
-    name: "Emerald",
-    theme: {
-      bgPage: "#ecfdf5",
-      textPrimary: "#064e3b",
-      textSecondary: "#065f46",
-      textTertiary: "#10b981",
-      headerGradientStart: "#34d399",
-      headerGradientEnd: "#10b981",
-      profileBorder: "#10b981",
-      profileBg: "#6ee7b7",
-      socialBg: "#d1fae5",
-      socialDefault: "#047857",
-      socialGithub: "#064e3b",
-      socialLinkedin: "#0e7490",
-      socialTwitter: "#0891b2",
-      socialYoutube: "#dc2626",
-      socialInstagram: "#db2777",
-      socialFacebook: "#2563eb",
-      linkCardBg: "#a7f3d0",
-      linkCardText: "#064e3b",
-      linkCardTextSecondary: "#065f46",
-      linkCardIcon: "#047857",
-      linkCardRadius: "12px",
-      linkThumbnailBg: "#6ee7b7",
-      footerText: "#047857",
-    },
-  },
-  {
-    name: "Sunset",
-    theme: {
-      bgPage: "#fef2f2",
-      textPrimary: "#7f1d1d",
-      textSecondary: "#991b1b",
-      textTertiary: "#ef4444",
-      headerGradientStart: "#f97316",
-      headerGradientEnd: "#ef4444",
-      profileBorder: "#ef4444",
-      profileBg: "#fca5a5",
-      socialBg: "#fee2e2",
-      socialDefault: "#b91c1c",
-      socialGithub: "#7f1d1d",
-      socialLinkedin: "#0369a1",
-      socialTwitter: "#0ea5e9",
-      socialYoutube: "#dc2626",
-      socialInstagram: "#db2777",
-      socialFacebook: "#1d4ed8",
-      linkCardBg: "#fecaca",
-      linkCardText: "#7f1d1d",
-      linkCardTextSecondary: "#991b1b",
-      linkCardIcon: "#b91c1c",
-      linkCardRadius: "12px",
-      linkThumbnailBg: "#fca5a5",
-      footerText: "#b91c1c",
-    },
-  },
-  {
-    name: "Ocean",
-    theme: {
-      bgPage: "#f0f9ff",
-      textPrimary: "#083344",
-      textSecondary: "#164e63",
-      textTertiary: "#0ea5e9",
-      headerGradientStart: "#0ea5e9",
-      headerGradientEnd: "#0369a1",
-      profileBorder: "#0ea5e9",
-      profileBg: "#7dd3fc",
-      socialBg: "#e0f2fe",
-      socialDefault: "#0c4a6e",
-      socialGithub: "#083344",
-      socialLinkedin: "#0369a1",
-      socialTwitter: "#0284c7",
-      socialYoutube: "#dc2626",
-      socialInstagram: "#db2777",
-      socialFacebook: "#1d4ed8",
-      linkCardBg: "#bae6fd",
-      linkCardText: "#083344",
-      linkCardTextSecondary: "#164e63",
-      linkCardIcon: "#0c4a6e",
-      linkCardRadius: "12px",
-      linkThumbnailBg: "#7dd3fc",
-      footerText: "#0c4a6e",
-    },
-  },
-  {
-    name: "Custom",
-    theme: null,
-  },
-];
+import { presetThemes } from "../assets/PresetThemes";
 
 const ThemeDashboard = () => {
-
   const [selectedTheme, setSelectedTheme] = useState(null);
   const [customTheme, setCustomTheme] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-
 
   const [activeThemeIndex, setActiveThemeIndex] = useState(
     presetThemes.length - 1
@@ -186,19 +38,6 @@ const ThemeDashboard = () => {
     }
   }, [currentUser, initialThemeSet]);
 
-  // // Apply the selected theme to preview
-  // useEffect(() => {
-
-  //   if (customTheme) {
-  //     applyPreviewTheme(customTheme);
-  //   }
-
-  //   if (selectedTheme) {
-  //     applyPreviewTheme(selectedTheme);
-  //   }
-
-  // }, [selectedTheme, customTheme]);
-
   const applyPreviewTheme = (theme) => {
     const root = document.getElementById("theme-preview");
     if (!root) return;
@@ -208,118 +47,83 @@ const ThemeDashboard = () => {
     });
   };
 
-  // const handleThemeSelect = (theme, index) => {
-  //   setActiveThemeIndex(index);
-  //   if (theme.name === "Custom") {
-  //     setSelectedTheme(customTheme);
-  //   } else {
-  //     setSelectedTheme(theme.theme);
-  //   }
-  // };
-
-  // const handleSaveTheme = async () => {
-  //   if (!selectedTheme) return;
-
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.patch(
-  //       `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
-  //       { theme: selectedTheme },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     // Update user context with new theme
-  //     updateUser({ ...currentUser, theme: selectedTheme });
-  //     alert("Theme saved successfully!");
-  //   } catch (error) {
-  //     console.error("Error saving theme:", error);
-  //     alert("Failed to save theme");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // Check if a theme is the user's current theme
   
+  const handleThemeSelect = (theme, index) => {
+    setActiveThemeIndex(index);
+    if (theme.name === "Custom") {
+      // When selecting Custom, use the customTheme state (which contains your color selections)
+      setSelectedTheme({
+        ...customTheme,
+        // Include all theme properties with customTheme values or fallbacks
+        bgPage: customTheme.bgPage || currentUser?.theme?.bgPage || "#ffffff",
+        headerGradientStart:
+          customTheme.headerGradientStart ||
+          currentUser?.theme?.headerGradientStart ||
+          "#6366f1",
+        headerGradientEnd:
+          customTheme.headerGradientEnd ||
+          currentUser?.theme?.headerGradientEnd ||
+          "#8b5cf6",
+        // Include all other theme properties...
+        linkCardBg:
+          customTheme.linkCardBg || currentUser?.theme?.linkCardBg || "#ffffff",
+        // Add all other theme properties here
+      });
+    } else {
+      // For preset themes, use the theme object directly
+      setSelectedTheme(theme.theme);
+    }
+  };
 
-  // Update the handleThemeSelect function
-const handleThemeSelect = (theme, index) => {
-  setActiveThemeIndex(index);
-  if (theme.name === "Custom") {
-    // When selecting Custom, use the customTheme state (which contains your color selections)
-    setSelectedTheme({
-      ...customTheme,
-      // Include all theme properties with customTheme values or fallbacks
-      bgPage: customTheme.bgPage || currentUser?.theme?.bgPage || "#ffffff",
-      headerGradientStart: customTheme.headerGradientStart || currentUser?.theme?.headerGradientStart || "#6366f1",
-      headerGradientEnd: customTheme.headerGradientEnd || currentUser?.theme?.headerGradientEnd || "#8b5cf6",
-      // Include all other theme properties...
-      linkCardBg: customTheme.linkCardBg || currentUser?.theme?.linkCardBg || "#ffffff",
-      // Add all other theme properties here
-    });
-  } else {
-    // For preset themes, use the theme object directly
-    setSelectedTheme(theme.theme);
-  }
-};
+  // Update the useEffect for applying preview
+  useEffect(() => {
+    if (activeThemeIndex === presetThemes.length - 1 && customTheme) {
+      // When custom theme is active, apply customTheme
+      applyPreviewTheme(customTheme);
+    } else if (selectedTheme) {
+      // Otherwise apply selectedTheme
+      applyPreviewTheme(selectedTheme);
+    }
+  }, [selectedTheme, customTheme, activeThemeIndex]);
 
-// Update the useEffect for applying preview
-useEffect(() => {
-  if (activeThemeIndex === presetThemes.length - 1 && customTheme) {
-    // When custom theme is active, apply customTheme
-    applyPreviewTheme(customTheme);
-  } else if (selectedTheme) {
-    // Otherwise apply selectedTheme
-    applyPreviewTheme(selectedTheme);
-  }
-}, [selectedTheme, customTheme, activeThemeIndex]);
+  // Update the handleSaveTheme function
+  const handleSaveTheme = async () => {
+    let themeToSave;
 
-// Update the handleSaveTheme function
-const handleSaveTheme = async () => {
-  let themeToSave;
-  
-  if (activeThemeIndex === presetThemes.length - 1) {
-    // If custom theme is selected, use customTheme
-    themeToSave = customTheme;
-  } else {
-    // Otherwise use selectedTheme
-    themeToSave = selectedTheme;
-  }
+    if (activeThemeIndex === presetThemes.length - 1) {
+      // If custom theme is selected, use customTheme
+      themeToSave = customTheme;
+    } else {
+      // Otherwise use selectedTheme
+      themeToSave = selectedTheme;
+    }
 
-  if (!themeToSave) return;
+    if (!themeToSave) return;
 
-  setIsLoading(true);
-  try {
-    const response = await axios.patch(
-      `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
-      { theme: themeToSave },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    setIsLoading(true);
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
+        { theme: themeToSave },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    // Update user context with new theme
-    updateUser({ ...currentUser, theme: themeToSave });
-    alert("Theme saved successfully!");
-  } catch (error) {
-    console.error("Error saving theme:", error);
-    alert("Failed to save theme");
-  } finally {
-    setIsLoading(false);
-  }
-};
-  
+      // Update user context with new theme
+      updateUser({ ...currentUser, theme: themeToSave });
+      alert("Theme saved successfully!");
+    } catch (error) {
+      console.error("Error saving theme:", error);
+      alert("Failed to save theme");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-
-  
   const isCurrentTheme = (theme) => {
     return (
       currentUser?.theme &&
