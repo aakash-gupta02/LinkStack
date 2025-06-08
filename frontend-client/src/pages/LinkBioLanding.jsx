@@ -30,33 +30,63 @@ const LinkBioLanding = () => {
         <NavBar />
       </nav>
 
-      {/* Hero Section */}
-      <section className="hero-gradient text-white pt-32 pb-20">
-        <div className="container mx-auto px-6 flex flex-col items-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 max-w-3xl">
-            Build Your Link in Bio with One Click
-          </h1>
-          <p className="text-lg text-center mb-10 max-w-2xl">
-            Create a professional bio link page that showcases all your content
-            in one place. Perfect for creators, influencers, and professionals.
-          </p>
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
-            <button className="bg-white text-primary px-6 py-3 rounded-button font-medium whitespace-nowrap">
-              Get Started Free
-            </button>
-            <button className="border border-white text-white px-6 py-3 rounded-button font-medium whitespace-nowrap">
-              See Demo
-            </button>
-          </div>
-          <div className="w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden">
-            <img
-              src="https://readdy.ai/api/search-image?query=modern%20user%20interface%20for%20a%20link%20in%20bio%20tool%20showing%20a%20clean%20dashboard%20with%20profile%20preview%2C%20social%20media%20links%2C%20and%20analytics%20displayed%20on%20a%20laptop%20screen%20with%20blurred%20gradient%20background&width=800&height=450&seq=123&orientation=landscape"
-              alt="LinkBio Dashboard Preview"
-              className="w-full h-auto object-top"
-            />
-          </div>
-        </div>
-      </section>
+
+      {/* hero */}
+  {/* Hero Section */}
+<section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-600 text-white pt-32 pb-20">
+  {/* Decorative elements */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-full opacity-10">
+      <div className="absolute top-0 left-0 w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+  </div>
+
+  <div className="container mx-auto px-6 flex flex-col items-center relative z-10">
+    <h1 className="text-4xl md:text-6xl font-bold text-center mb-6 max-w-4xl leading-tight">
+      Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">Link in Bio</span> with One Click
+    </h1>
+    
+    <p className="text-xl text-center mb-10 max-w-2xl text-indigo-100">
+      Create a professional bio link page that showcases all your content
+      in one place. Perfect for creators, influencers, and professionals.
+    </p>
+    
+    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
+      <button className="bg-white text-indigo-600 px-8 py-4 rounded-full font-semibold whitespace-nowrap hover:bg-indigo-50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+        Get Started Free
+      </button>
+      <button className="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold whitespace-nowrap hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm">
+        See Demo
+      </button>
+    </div>
+    
+    <div className="w-full max-w-5xl bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/20 relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+      <img
+        src="https://readdy.ai/api/search-image?query=modern%20user%20interface%20for%20a%20link%20in%20bio%20tool%20showing%20a%20clean%20dashboard%20with%20profile%20preview%2C%20social%20media%20links%2C%20and%20analytics%20displayed%20on%20a%20laptop%20screen%20with%20blurred%20gradient%20background&width=800&height=450&seq=123&orientation=landscape"
+        alt="LinkBio Dashboard Preview"
+        className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+      />
+    </div>
+  </div>
+
+  {/* Bottom wave shape */}
+  <div className="absolute bottom-0 left-0 right-0">
+    <svg 
+      viewBox="0 0 1440 120" 
+      className="w-full"
+      preserveAspectRatio="none"
+    >
+      <path 
+        fill="#FFFFFF" 
+        fillOpacity="1" 
+        d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,96C960,107,1056,117,1152,117.3C1248,117,1344,107,1392,101.3L1440,96L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"
+      ></path>
+    </svg>
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="py-20 bg-gray-50">
@@ -357,16 +387,18 @@ const LinkBioLanding = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Free Plan */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-4">Free Plan</h3>
+            <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">
+                  Free Plan
+                </h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$0</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold text-gray-900">$0</span>
+                  <span className="text-gray-500 text-base">/month</span>
                 </div>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 text-gray-700">
                   {[
                     "Basic bio link page",
                     "Up to 5 social links",
@@ -375,28 +407,30 @@ const LinkBioLanding = () => {
                   ].map((feature) => (
                     <li key={feature} className="flex items-center">
                       <i className="ri-check-line text-green-500 mr-2"></i>
-                      <span>{feature}</span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <button className="w-full bg-gray-200 text-gray-800 py-3 rounded-button font-medium whitespace-nowrap">
+                <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all duration-200">
                   Get Started
                 </button>
               </div>
             </div>
 
             {/* Pro Plan */}
-            <div className="bg-white rounded-lg shadow-xl border-2 border-primary overflow-hidden transform scale-105">
-              <div className="bg-primary text-white py-2 text-center text-sm font-medium">
+            <div className="bg-white rounded-2xl shadow-xl border-2 border-primary transform scale-105 hover:shadow-2xl transition-all duration-300 relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-semibold px-4 py-1 rounded-full shadow-md">
                 MOST POPULAR
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-4">Pro Plan</h3>
+              <div className="p-8 pt-14">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">
+                  Pro Plan
+                </h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$24</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold text-gray-900">$24</span>
+                  <span className="text-gray-500 text-base">/month</span>
                 </div>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 text-gray-700">
                   {[
                     "Advanced bio link page",
                     "Unlimited social links",
@@ -407,25 +441,27 @@ const LinkBioLanding = () => {
                   ].map((feature) => (
                     <li key={feature} className="flex items-center">
                       <i className="ri-check-line text-green-500 mr-2"></i>
-                      <span>{feature}</span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <button className="w-full bg-primary text-white py-3 rounded-button font-medium whitespace-nowrap">
+                <button className="w-full bg-primary hover:bg-indigo-700 text-white py-3 rounded-lg font-medium transition-all duration-200">
                   Get Started
                 </button>
               </div>
             </div>
 
             {/* Business Plan */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-4">Business Plan</h3>
+            <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-4 text-gray-800">
+                  Business Plan
+                </h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">$49</span>
-                  <span className="text-gray-600">/month</span>
+                  <span className="text-4xl font-bold text-gray-900">$49</span>
+                  <span className="text-gray-500 text-base">/month</span>
                 </div>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 text-gray-700">
                   {[
                     "Everything in Pro",
                     "Team collaboration",
@@ -436,21 +472,24 @@ const LinkBioLanding = () => {
                   ].map((feature) => (
                     <li key={feature} className="flex items-center">
                       <i className="ri-check-line text-green-500 mr-2"></i>
-                      <span>{feature}</span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <button className="w-full bg-gray-800 text-white py-3 rounded-button font-medium whitespace-nowrap">
+                <button className="w-full bg-gray-800 hover:bg-gray-900 text-white py-3 rounded-lg font-medium transition-all duration-200">
                   Get Started
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="text-center mt-10 text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mt-12 text-gray-600 max-w-2xl mx-auto text-sm">
             <p>
-              All plans come with a 14-day free trial. No credit card required.
-              Cancel anytime.
+              All plans come with a{" "}
+              <span className="font-medium text-gray-800">
+                14-day free trial
+              </span>
+              . No credit card required. Cancel anytime.
             </p>
           </div>
         </div>

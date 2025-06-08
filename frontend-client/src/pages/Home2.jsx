@@ -5,10 +5,6 @@ import LinkBioLanding from './LinkBioLanding'
 
 const Home2 = () => {
   return (
-    // <div className='bg-indigo-600' >
-    //     {/* <NavBar/>
-    //     <Hero/> */}
-    // </div>
     <div>
 
       <LinkBioLanding/>
