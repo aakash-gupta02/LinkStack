@@ -1,4 +1,4 @@
- export const presetThemes = [
+export const presetThemes = [
   {
     name: "Minimal",
     theme: {
@@ -27,7 +27,7 @@
       footerText: "#9ca3af",
     },
   },
-    {
+  {
     name: "Twilight",
     theme: {
       bgPage: "#1f2937",
@@ -53,6 +53,34 @@
       linkCardRadius: "12px",
       linkThumbnailBg: "#4b5563",
       footerText: "#9ca3af",
+    },
+  },
+  {
+    name: "Cosmic Purple",
+    theme: {
+      bgPage: "#0F172A",
+      textPrimary: "#FFFFFF",
+      textSecondary: "#A5B4FC",
+      textTertiary: "#818CF8",
+      headerGradientStart: "#4F46E5",
+      headerGradientEnd: "#7C3AED",
+      profileBorder: "rgba(165, 180, 252, 0.2)",
+      profileBg: "rgba(15, 23, 42, 0.7)",
+      socialBg: "rgba(79, 70, 229, 0.1)",
+      socialDefault: "#A5B4FC",
+      socialGithub: "#A5B4FC",
+      socialLinkedin: "#A5B4FC",
+      socialTwitter: "#A5B4FC",
+      socialYoutube: "#A5B4FC",
+      socialInstagram: "#A5B4FC",
+      socialFacebook: "#A5B4FC",
+      linkCardBg: "rgba(30, 41, 59, 0.5)",
+      linkCardText: "#E0E7FF",
+      linkCardTextSecondary: "#818CF8",
+      linkCardIcon: "#818CF8",
+      linkCardRadius: "16px",
+      linkThumbnailBg: "rgba(99, 102, 241, 0.1)",
+      footerText: "#64748B",
     },
   },
   {
@@ -109,6 +137,90 @@
       linkCardRadius: "12px",
       linkThumbnailBg: "#f9a8d4",
       footerText: "#9d174d",
+    },
+  },
+    {
+    name: "CosmicIndigo",
+    theme: {
+      bgPage: "#0F172A", // Main dark indigo background
+      textPrimary: "#F5F6FF", // Primary text (headings, main content)
+      textSecondary: "#A5B4FC", // Secondary text (subtitles, links)
+      textTertiary: "#818CF8", // Tertiary text (minor text, placeholders)
+      headerGradientStart: "#4F46E5", // Gradient start for headers (hero, navbar)
+      headerGradientEnd: "#6366F1", // Gradient end for headers
+      profileBorder: "#4F46E5", // Profile border (e.g., navbar avatar)
+      profileBg: "#312E81", // Profile background (frosted-glass effect)
+      socialBg: "#312E81", // Social icon background
+      socialDefault: "#A5B4FC", // Default social icon color
+      socialGithub: "#181717", // GitHub icon color
+      socialLinkedin: "#0A66C2", // LinkedIn icon color
+      socialTwitter: "#1DA1F2", // Twitter/X icon color
+      socialYoutube: "#FF0000", // YouTube icon color
+      socialInstagram: "#E4405F", // Instagram icon color
+      socialFacebook: "#1877F2", // Facebook icon color
+      linkCardBg: "#312E81", // Link card background (frosted-glass)
+      linkCardText: "#F5F6FF", // Link card primary text
+      linkCardTextSecondary: "#A5B4FC", // Link card secondary text
+      linkCardIcon: "#4F46E5", // Link card icon color
+      linkCardRadius: "16px", // Link card border radius
+      linkThumbnailBg: "#1E293B", // Thumbnail background
+      footerText: "#A5B4FC", // Footer text color
+    },
+  },
+  {
+    name: "StellarIndigo",
+    theme: {
+      bgPage: "#0F172A", // Same dark indigo background
+      textPrimary: "#F5F6FF", // Primary text
+      textSecondary: "#A5B4FC", // Secondary text
+      textTertiary: "#A5B4FC", // Tertiary text (slightly brighter)
+      headerGradientStart: "#6366F1", // Softer gradient start
+      headerGradientEnd: "#7C3AED", // Purple accent for gradient end
+      profileBorder: "#6366F1", // Softer indigo border
+      profileBg: "#3730A3", // Slightly lighter frosted-glass
+      socialBg: "#3730A3", // Matching social background
+      socialDefault: "#A5B4FC", // Default social color
+      socialGithub: "#181717",
+      socialLinkedin: "#0A66C2",
+      socialTwitter: "#1DA1F2",
+      socialYoutube: "#FF0000",
+      socialInstagram: "#E4405F",
+      socialFacebook: "#1877F2",
+      linkCardBg: "#3730A3", // Lighter link card background
+      linkCardText: "#F5F6FF", // Link card text
+      linkCardTextSecondary: "#A5B4FC", // Secondary text
+      linkCardIcon: "#6366F1", // Softer icon color
+      linkCardRadius: "12px", // Tighter radius for modern look
+      linkThumbnailBg: "#1E293B", // Same thumbnail background
+      footerText: "#A5B4FC", // Footer text
+    },
+  },
+  {
+    name: "NebulaIndigo",
+    theme: {
+      bgPage: "#0F172A", // Consistent dark indigo
+      textPrimary: "#F5F6FF", // Primary text
+      textSecondary: "#A5B4FC", // Secondary text
+      textTertiary: "#818CF8", // Tertiary text
+      headerGradientStart: "#4F46E5", // Bold gradient start
+      headerGradientEnd: "#A78BFA", // Lighter purple end
+      profileBorder: "#A78BFA", // Light purple border
+      profileBg: "#4338CA", // Brighter frosted-glass
+      socialBg: "#4338CA", // Matching social background
+      socialDefault: "#A5B4FC", // Default social color
+      socialGithub: "#181717",
+      socialLinkedin: "#0A66C2",
+      socialTwitter: "#1DA1F2",
+      socialYoutube: "#FF0000",
+      socialInstagram: "#E4405F",
+      socialFacebook: "#1877F2",
+      linkCardBg: "#4338CA", // Brighter link card background
+      linkCardText: "#F5F6FF", // Link card text
+      linkCardTextSecondary: "#A5B4FC", // Secondary text
+      linkCardIcon: "#A78BFA", // Light purple icon
+      linkCardRadius: "20px", // Softer radius for organic feel
+      linkThumbnailBg: "#1E293B", // Thumbnail background
+      footerText: "#A5B4FC", // Footer text
     },
   },
   {

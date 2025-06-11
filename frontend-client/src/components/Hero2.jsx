@@ -1,0 +1,233 @@
+// import { ArrowRightIcon, SparklesIcon } from "@heroicons/react/24/solid";
+// import { motion } from "framer-motion";
+
+// export default function Hero() {
+//   return (
+//     <div className="relative bg-[#0F172A] overflow-hidden">
+//       {/* Simplified background */}
+//       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 to-[#0F172A]"></div>
+
+//       <div className="relative max-w-7xl mx-auto px-6 py-24 sm:py-32 lg:px-8">
+//         <div className="text-center">
+//           {/* Badge - Lightweight animation */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.6 }}
+//             className="inline-flex items-center gap-x-1.5 px-4 py-2 rounded-full bg-indigo-900/50 border border-indigo-500/30 text-indigo-100 text-sm mb-8"
+//           >
+//             <SparklesIcon className="h-4 w-4 text-indigo-300" />
+//             Introducing LinkStack 2.0
+//           </motion.div>
+
+//           {/* Headline */}
+//           <motion.h1
+//             initial={{ opacity: 0, y: 30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className="text-4xl md:text-6xl font-bold tracking-tight text-white"
+//           >
+//             <span className="block">Organize. Share.</span>
+//             <motion.span
+//               animate={{ opacity: [0.8, 1, 0.8] }}
+//               transition={{ duration: 3, repeat: Infinity }}
+//               className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-indigo-100"
+//             >
+//               Dominate.
+//             </motion.span>
+//           </motion.h1>
+
+//           {/* Subtitle */}
+//           <motion.p
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             transition={{ delay: 0.4, duration: 0.8 }}
+//             className="mt-6 text-lg leading-8 text-indigo-200 max-w-2xl mx-auto"
+//           >
+//             The most powerful link management platform for creators, businesses, and developers.
+//           </motion.p>
+
+//           {/* CTA Buttons */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.6 }}
+//             className="mt-10 flex items-center justify-center gap-x-6"
+//           >
+//             <motion.a
+//               whileHover={{ scale: 1.03 }}
+//               whileTap={{ scale: 0.97 }}
+//               href="#"
+//               className="flex items-center gap-x-2 rounded-md bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+//             >
+//               Get Started <ArrowRightIcon className="h-4 w-4" />
+//             </motion.a>
+//             <a
+//               href="#"
+//               className="text-sm font-semibold text-white hover:text-indigo-300"
+//             >
+//               Watch demo <span aria-hidden="true">→</span>
+//             </a>
+//           </motion.div>
+//         </div>
+
+//         {/* Preview - Simplified */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 50 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.8 }}
+//           className="mt-16 mx-auto max-w-3xl bg-indigo-900/30 rounded-2xl border border-indigo-500/20 p-1 backdrop-blur-sm"
+//         >
+//           <div className="rounded-xl bg-gray-900/80 overflow-hidden">
+//             <div className="flex items-center px-4 py-3 bg-gray-800/50 border-b border-gray-700/50">
+//               <div className="flex space-x-2">
+//                 <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+//                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+//                 <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+//               </div>
+//               <div className="flex-1 text-center text-xs text-gray-400">links.yourname.com</div>
+//             </div>
+//             <div className="p-6 grid grid-cols-3 gap-3">
+//               {['Work', 'Social', 'Projects', 'Blog', 'Contact', 'More'].map((item) => (
+//                 <div 
+//                   key={item}
+//                   className="bg-indigo-900/20 hover:bg-indigo-800/30 transition-colors rounded-lg p-3 text-center text-sm text-indigo-100"
+//                 >
+//                   {item}
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </motion.div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+import { ArrowPathIcon, ArrowRightIcon, CubeTransparentIcon, LinkIcon, SparklesIcon } from "@heroicons/react/24/solid";
+
+export default function Hero() {
+  return (
+    <div className="relative bg-[#0F172A] overflow-hidden isolate">
+      {/* **Cosmic Background** */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
+          {/* Grid Mesh */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:24px_24px] opacity-20" />
+          
+          {/* Floating Orbs */}
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-indigo-500 blur-xl opacity-40"
+              style={{
+                width: `${Math.random() * 200 + 50}px`,
+                height: `${Math.random() * 200 + 50}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* **Main Content** */}
+      <div className="max-w-7xl mx-auto px-6 py-24 sm:py-32 lg:px-8">
+        <div className="text-center">
+          {/* **Badge** */}
+          <div
+            className="inline-flex items-center gap-x-2 px-4 py-2 rounded-full bg-indigo-900/50 border border-indigo-500/30 text-indigo-100 text-sm mb-8 backdrop-blur-sm"
+          >
+            <SparklesIcon className="h-4 w-4 text-indigo-300" />
+            <span>Introducing LinkStack 2.0</span>
+          </div>
+
+          {/* **Headline** */}
+          <h1
+            className="text-5xl md:text-7xl font-bold tracking-tight text-white"
+          >
+            <span className="inline-block">
+              Organize. Share.{" "}
+              <span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-indigo-100"
+              >
+                Dominate.
+              </span>
+            </span>
+          </h1>
+
+          {/* **Subtitle** */}
+          <p
+            className="mt-6 text-lg leading-8 text-indigo-200 max-w-2xl mx-auto"
+          >
+            The most powerful link management platform for creators, businesses, and developers.  
+            <span className="block mt-2 text-indigo-300/80">No fluff. Just speed.</span>
+          </p>
+
+          {/* **CTA Buttons** */}
+          <div
+            className="mt-10 flex items-center justify-center gap-x-6"
+          >
+            <a
+              href="#"
+              className="flex items-center gap-x-2 rounded-md bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Get Started <ArrowRightIcon className="h-4 w-4" />
+            </a>
+            <a
+              href="#"
+              className="flex items-center gap-x-2 rounded-md px-6 py-3.5 text-sm font-semibold text-white hover:text-indigo-300"
+            >
+              <ArrowPathIcon className="h-4 w-4" />
+              Watch Demo
+            </a>
+          </div>
+
+          {/* **3D Floating Preview** */}
+          <div
+            className="mt-16 mx-auto max-w-3xl"
+          >
+            <div className="relative rounded-3xl bg-gradient-to-br from-indigo-900/40 to-indigo-900/20 border border-indigo-500/30 p-1 backdrop-blur-lg shadow-2xl shadow-indigo-500/10">
+              {/* Browser Mockup */}
+              <div className="rounded-2xl bg-gray-900/80 border border-gray-700/50 overflow-hidden">
+                <div className="flex items-center px-4 py-3 bg-gray-800/50 border-b border-gray-700/50">
+                  <div className="flex space-x-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-xs text-gray-400">links.yourname.com</div>
+                </div>
+                
+                {/* Link Cards Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+                  {[
+                    { name: "Portfolio", icon: <CubeTransparentIcon className="h-5 w-5" />, color: "bg-indigo-500" },
+                    { name: "GitHub", icon: <LinkIcon className="h-5 w-5" />, color: "bg-purple-500" },
+                    { name: "Twitter", icon: <LinkIcon className="h-5 w-5" />, color: "bg-blue-500" },
+                    { name: "LinkedIn", icon: <LinkIcon className="h-5 w-5" />, color: "bg-sky-500" },
+                    { name: "YouTube", icon: <LinkIcon className="h-5 w-5" />, color: "bg-red-500" },
+                    { name: "Contact", icon: <LinkIcon className="h-5 w-5" />, color: "bg-emerald-500" },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center gap-x-3 ${item.color}/10 hover:${item.color}/20 border border-gray-700/50 rounded-lg p-4 cursor-pointer transition-all duration-200`}
+                    >
+                      <div className={`p-2 rounded-lg ${item.color} text-white`}>
+                        {item.icon}
+                      </div>
+                      <div className="text-sm font-medium text-white">{item.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
