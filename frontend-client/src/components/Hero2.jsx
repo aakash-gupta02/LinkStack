@@ -1,117 +1,9 @@
-// import { ArrowRightIcon, SparklesIcon } from "@heroicons/react/24/solid";
-// import { motion } from "framer-motion";
-
-// export default function Hero() {
-//   return (
-//     <div className="relative bg-[#0F172A] overflow-hidden">
-//       {/* Simplified background */}
-//       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 to-[#0F172A]"></div>
-
-//       <div className="relative max-w-7xl mx-auto px-6 py-24 sm:py-32 lg:px-8">
-//         <div className="text-center">
-//           {/* Badge - Lightweight animation */}
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.6 }}
-//             className="inline-flex items-center gap-x-1.5 px-4 py-2 rounded-full bg-indigo-900/50 border border-indigo-500/30 text-indigo-100 text-sm mb-8"
-//           >
-//             <SparklesIcon className="h-4 w-4 text-indigo-300" />
-//             Introducing LinkStack 2.0
-//           </motion.div>
-
-//           {/* Headline */}
-//           <motion.h1
-//             initial={{ opacity: 0, y: 30 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.8 }}
-//             className="text-4xl md:text-6xl font-bold tracking-tight text-white"
-//           >
-//             <span className="block">Organize. Share.</span>
-//             <motion.span
-//               animate={{ opacity: [0.8, 1, 0.8] }}
-//               transition={{ duration: 3, repeat: Infinity }}
-//               className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-indigo-100"
-//             >
-//               Dominate.
-//             </motion.span>
-//           </motion.h1>
-
-//           {/* Subtitle */}
-//           <motion.p
-//             initial={{ opacity: 0 }}
-//             animate={{ opacity: 1 }}
-//             transition={{ delay: 0.4, duration: 0.8 }}
-//             className="mt-6 text-lg leading-8 text-indigo-200 max-w-2xl mx-auto"
-//           >
-//             The most powerful link management platform for creators, businesses, and developers.
-//           </motion.p>
-
-//           {/* CTA Buttons */}
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ delay: 0.6 }}
-//             className="mt-10 flex items-center justify-center gap-x-6"
-//           >
-//             <motion.a
-//               whileHover={{ scale: 1.03 }}
-//               whileTap={{ scale: 0.97 }}
-//               href="#"
-//               className="flex items-center gap-x-2 rounded-md bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
-//             >
-//               Get Started <ArrowRightIcon className="h-4 w-4" />
-//             </motion.a>
-//             <a
-//               href="#"
-//               className="text-sm font-semibold text-white hover:text-indigo-300"
-//             >
-//               Watch demo <span aria-hidden="true">→</span>
-//             </a>
-//           </motion.div>
-//         </div>
-
-//         {/* Preview - Simplified */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 50 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.8 }}
-//           className="mt-16 mx-auto max-w-3xl bg-indigo-900/30 rounded-2xl border border-indigo-500/20 p-1 backdrop-blur-sm"
-//         >
-//           <div className="rounded-xl bg-gray-900/80 overflow-hidden">
-//             <div className="flex items-center px-4 py-3 bg-gray-800/50 border-b border-gray-700/50">
-//               <div className="flex space-x-2">
-//                 <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-//                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
-//                 <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-//               </div>
-//               <div className="flex-1 text-center text-xs text-gray-400">links.yourname.com</div>
-//             </div>
-//             <div className="p-6 grid grid-cols-3 gap-3">
-//               {['Work', 'Social', 'Projects', 'Blog', 'Contact', 'More'].map((item) => (
-//                 <div 
-//                   key={item}
-//                   className="bg-indigo-900/20 hover:bg-indigo-800/30 transition-colors rounded-lg p-3 text-center text-sm text-indigo-100"
-//                 >
-//                   {item}
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </motion.div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
 import { ArrowPathIcon, ArrowRightIcon, CubeTransparentIcon, LinkIcon, SparklesIcon } from "@heroicons/react/24/solid";
 
 export default function Hero() {
   return (
     <div className="relative bg-[#0F172A] overflow-hidden isolate">
+      
       {/* **Cosmic Background** */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -228,6 +120,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

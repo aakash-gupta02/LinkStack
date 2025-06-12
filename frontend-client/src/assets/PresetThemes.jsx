@@ -139,8 +139,8 @@ export const presetThemes = [
       footerText: "#9d174d",
     },
   },
-    {
-    name: "CosmicIndigo",
+  {
+    name: "Cosmic Indigo",
     theme: {
       bgPage: "#0F172A", // Main dark indigo background
       textPrimary: "#F5F6FF", // Primary text (headings, main content)
@@ -168,7 +168,7 @@ export const presetThemes = [
     },
   },
   {
-    name: "StellarIndigo",
+    name: "Stellar Indigo",
     theme: {
       bgPage: "#0F172A", // Same dark indigo background
       textPrimary: "#F5F6FF", // Primary text
@@ -196,7 +196,7 @@ export const presetThemes = [
     },
   },
   {
-    name: "NebulaIndigo",
+    name: "Nebula Indigo",
     theme: {
       bgPage: "#0F172A", // Consistent dark indigo
       textPrimary: "#F5F6FF", // Primary text
