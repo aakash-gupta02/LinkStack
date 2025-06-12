@@ -3,7 +3,7 @@ import { ArrowPathIcon, ArrowRightIcon, CubeTransparentIcon, LinkIcon, SparklesI
 export default function Hero() {
   return (
     <div className="relative bg-[#0F172A] overflow-hidden isolate">
-      
+
       {/* **Cosmic Background** */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
@@ -118,6 +118,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+          
         </div>
       </div>
 

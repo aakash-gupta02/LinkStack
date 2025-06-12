@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import NotFoundPage from "./NotFoundPage";
 
 const UserLinksPage = () => {
   const { username } = useParams();
@@ -33,7 +34,7 @@ const UserLinksPage = () => {
   };
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
-  if (!profile) return <div className="text-center py-10">User not found</div>;
+  if (!profile) return <div className="">{<NotFoundPage/>}</div>;
 
   return (
     <div className="relative min-h-screen bg-gray-50 font-sans overflow-hidden">
@@ -156,6 +157,7 @@ const UserLinksPage = () => {
 
         </div>
       </div>
+
     </div>
   );
 };

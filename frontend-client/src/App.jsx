@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import UserDashboard from "./pages/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute"; // Adjust path accordingly
 import Link2 from "./pages/Link2";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
 
@@ -19,6 +20,7 @@ return (
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Home2/>} />
+      <Route path="*" element={<NotFoundPage/>}/>
 
       <Route
         path="/dashboard"

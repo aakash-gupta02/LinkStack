@@ -36,15 +36,15 @@ const LinkBioLanding = () => {
         <NavBar />
       </nav>
 
-      <Hero2/>
+      <Hero2 />
 
       <Features />
-<HorizontalScroll/>
+      {/* <HorizontalScroll /> */}
       {/* Pricing Section */}
       <Pricing />
 
       {/* CTA Section */}
-<Cta/>
+      <Cta />
 
       {/* Footer */}
       <Footer />
