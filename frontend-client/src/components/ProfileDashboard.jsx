@@ -53,7 +53,7 @@ const ProfileDashboard = () => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/auth/update/${currentUser.id}`,
+        `https://linkstack-wjl6.onrender.com/api/auth/update/${currentUser.id}`,
         formData,
         {
           headers: {

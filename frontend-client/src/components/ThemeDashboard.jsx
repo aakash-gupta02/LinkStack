@@ -103,7 +103,7 @@ const ThemeDashboard = () => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/auth/updatetheme/${currentUser.id}`,
+        `https://linkstack-wjl6.onrender.com/api/auth/updatetheme/${currentUser.id}`,
         { theme: themeToSave },
         {
           headers: {

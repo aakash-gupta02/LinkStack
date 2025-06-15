@@ -9,6 +9,7 @@ import {
 import React from "react";
 
 export default function NotFoundPage() {
+  
   return (
     <div className="relative bg-[#0F172A] overflow-hidden  isolate min-h-screen">
       {/* Cosmic Background - identical to hero section */}

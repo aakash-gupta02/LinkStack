@@ -75,7 +75,7 @@ const SupportPage = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/support/submit/${currentUser.id}`,
+        `https://linkstack-wjl6.onrender.com/api/support/submit/${currentUser.id}`,
         { ticket },
         {
           headers: {

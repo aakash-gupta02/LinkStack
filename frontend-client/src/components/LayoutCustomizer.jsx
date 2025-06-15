@@ -131,7 +131,7 @@ const LayoutDashboard = () => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `http://localhost:3000/api/auth/updatelayout/${currentUser.id}`,
+        `https://linkstack-wjl6.onrender.com/api/auth/updatelayout/${currentUser.id}`,
         { layout: layoutToSave },
         {
           headers: {

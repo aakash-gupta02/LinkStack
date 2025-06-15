@@ -15,7 +15,7 @@ export const AnalyticsProvider = ({ children }) => {
       setLoading(true);
     //   const res = await axios.get(`/api/analytics/${user?._id}`, {
 
-      const res = await axios.get(`http://localhost:3000/analytics`, {
+      const res = await axios.get(`https://linkstack-wjl6.onrender.com/analytics`, { 
 
         headers: {
           Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export const AnalyticsProvider = ({ children }) => {
       });
 
       const fullData = res.data;
-      console.log(res);
+      // console.log(res);
       
       const {
         user: userData,

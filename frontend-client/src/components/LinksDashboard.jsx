@@ -50,7 +50,7 @@ const handleChange = (e) => {
   // Create new link
   const handleCreate = async () => {
     try {
-      await axios.post("http://localhost:3000/api/link/create", formData, {
+      await axios.post("https://linkstack-wjl6.onrender.com/api/link/create", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,7 +69,7 @@ const handleChange = (e) => {
   const handleEdit = async () => {
     try {
       await axios.patch(
-        `http://localhost:3000/api/link/update/${currentLink.id}`,
+        `https://linkstack-wjl6.onrender.com/api/link/update/${currentLink.id}`,
         formData,
         {
           headers: {
@@ -91,7 +91,7 @@ const handleChange = (e) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/link/delete/${currentLink}`,
+        `https://linkstack-wjl6.onrender.com/api/link/delete/${currentLink}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ const handleChange = (e) => {
         }
       );
 
-      console.log("cureent link", currentLink);
+      // console.log("cureent link", currentLink);
 
       // fetchData(); // Refresh links
       setIsDeleteModalOpen(false);
@@ -114,8 +114,8 @@ const handleChange = (e) => {
   const openEditModal = (link) => {
     setCurrentLink(link);
 
-    console.log("edit model link", link);
-    console.log("current link of update", currentLink);
+    // console.log("edit model link", link);
+    // console.log("current link of update", currentLink);
 
     setFormData({
       title: link.title,
@@ -133,7 +133,7 @@ const handleChange = (e) => {
   // Open delete confirmation modal
   const openDeleteModal = (link) => {
     setCurrentLink(link);
-    console.log("dlt model", link);
+    // console.log("dlt model", link);
 
     setIsDeleteModalOpen(true);
   };

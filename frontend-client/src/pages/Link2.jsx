@@ -51,7 +51,7 @@ const Link2 = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/${username}`);
+        const res = await axios.get(`https://linkstack-wjl6.onrender.com/${username}`);
         setProfile(res.data.profile);
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -177,7 +177,7 @@ const Link2 = () => {
                 key={link.id}
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`http://localhost:3000/l/${link._id}`}
+                href={`https://linkstack-wjl6.onrender.com/l/${link._id}`}
                 className="block rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer whitespace-nowrap"
                 style={{
                   backgroundColor: "var(--link-card-bg)",

@@ -29,17 +29,17 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      const res = await axios.post("https://linkstack-wjl6.onrender.com/api/auth/login", {
         ...formData,
       });
 
-      console.log("login:", res.data);
+      // console.log("login:", res.data);
 
       const { token, user } = res.data; // e.g., { token: '...', user: {...} }
 
       login(token, user);
 
-      console.log("apna wala console log :", { token, user });
+      // console.log("apna wala console log :", { token, user });
 
       navigate("/"); // Redirect on success
     } catch (err) {
