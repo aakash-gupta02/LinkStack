@@ -10,8 +10,7 @@ import {
 
 const LinkNav = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  //   const { user, logout } = useAuth();
-  const { user, logout } = false;
+    const { user, logout } = useAuth();
 
   const navigate = useNavigate();
 

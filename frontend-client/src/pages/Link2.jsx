@@ -93,9 +93,9 @@ const Link2 = () => {
       className="min-h-screen font-sans py-10 px-18"
       style={{ backgroundColor: "var(--bg-page)" }}
     >
-      <div className="absolute top-2 left-2 right-2 z-50 sm:top-4 sm:left-4 sm:right-4">
+      {/* <div className="absolute top-2 left-2 right-2 z-50 sm:top-4 sm:left-4 sm:right-4">
   <LinkNav />
-</div>
+</div> */}
 
 
       {/* Header with gradient background */}
@@ -105,7 +105,9 @@ const Link2 = () => {
           background:
             "linear-gradient(to bottom right, var(--header-gradient-start), var(--header-gradient-end))",
         }}
-      ></div>
+      >
+        <LinkNav/>
+      </div>
 
       {/* Main content container */}
       <div className="max-w-2xl mx-auto px-4 sm:px-6 -mt-20">

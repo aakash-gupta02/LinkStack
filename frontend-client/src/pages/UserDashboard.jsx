@@ -67,10 +67,12 @@ const UserDashboard = () => {
                       : "question-circle"
                   } mr-3`}
                 ></i>
+
                 <span>
                   {menu.charAt(0).toUpperCase() +
                     menu.slice(1).replace("-", " ")}
                 </span>
+                
               </button>
             ))}
           </nav>

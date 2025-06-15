@@ -18,20 +18,21 @@ return (
     <Routes>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<Login />} />
+      
       <Route path="/" element={<Home2/>} />
       <Route path="*" element={<NotFoundPage/>}/>
 
       <Route
-        path="/dashboard"
+        path="/link/dashboard"
         element={
           <ProtectedRoute>
             <UserDashboard />
           </ProtectedRoute>
         }
       />
-      <Route path="/link2/:username" element={<Link2/>} />
+      <Route path="/:username" element={<Link2/>} />
 
-      <Route path="/:username" element={<ProfilePage />} />
+      {/* <Route path="/:username" element={<ProfilePage />} /> */}
     </Routes>
   </div>
 );

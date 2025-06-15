@@ -51,10 +51,10 @@ export default function NotFoundPage() {
 
           {/* Error Message */}
           <h2 className="text-3xl md:text-4xl font-bold text-white">
-            User Not Found{" "}
+            Page Not Found{" "}
           </h2>
           <p className="mt-6 text-lg leading-8 text-indigo-200 max-w-2xl mx-auto">
-            The Profile you're looking for has not found!!
+            The Page you're looking for has not found!!
             <span className="block mt-2 text-indigo-300/80">
               Let's navigate you back home.
             </span>

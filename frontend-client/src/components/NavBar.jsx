@@ -23,14 +23,14 @@ const NavBar = () => {
 
   const profileLinks = [
     {
-      icon: <UserIcon className="h-5 w-5 text-indigo-400" />,
-      text: "My Profile",
+      icon: <LinkIcon className="h-5 w-5 text-indigo-400" />,
+      text: "My Links Page",
       action: () => navigate(`/${user?.username}`),
     },
     {
       icon: <Squares2X2Icon className="h-5 w-5 text-indigo-400" />,
       text: "Dashboard",
-      action: () => navigate("/dashboard"),
+      action: () => navigate("/link/dashboard"),
     },
     {
       icon: <ArrowRightStartOnRectangleIcon className="h-5 w-5 text-red-400" />,
@@ -99,7 +99,7 @@ const NavBar = () => {
 
             {/* Profile Modal */}
             {isProfileOpen && (
-              <div className="absolute right-0 top-12 w-64 bg-indigo-900/50 border border-indigo-500/30 rounded-xl shadow-xl z-50 overflow-hidden backdrop-blur-sm">
+              <div className="absolute right-0 top-12 w-64 bg-indigo-900/00 border border-indigo-500/30 rounded-xl shadow-xl z-50 overflow-hidden backdrop-blur-sm">
                 {/* Pointer/Arrow */}
                 <div className="absolute -top-2 right-4 w-3 h-3 bg-indigo-900/50 border-l border-t border-indigo-500/30 transform rotate-45 z-[-1]" />
 
@@ -113,10 +113,10 @@ const NavBar = () => {
                     />
                     <div>
                       <p className="font-medium text-sm text-indigo-100">
-                        {user.name || "User"}
+                        {user.name || "User"} / @{user.username}
                       </p>
-                      <p className="text-xs text-indigo-300/80">
-                        @{user.username}
+                      <p className="text-xs mt-1 text-indigo-300/80">
+                       {user.email}
                       </p>
                     </div>
                   </div>
