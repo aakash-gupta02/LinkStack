@@ -1,6 +1,6 @@
 # LinkStack - The Smart Link Hub
 
-![LinkStack Banner](https://i.imgur.com/JfQ5Y6h.png)
+[![Screenshot-2025-06-15-161354.png](https://i.postimg.cc/ncj5pTfx/Screenshot-2025-06-15-161354.png)](https://postimg.cc/zVNpkCf2)
 
 A Linktree-style personal link management app tailored for developers, business'es, creators, featuring built-in analytics, theme customization, and responsive layouts.
 
@@ -13,15 +13,28 @@ A Linktree-style personal link management app tailored for developers, business'
 - **Social Media Integration**
 - **Mobile Responsive**
 
-## 🖥️ Screenshots
+## ✨ Landing Page
+[![screencapture-localhost-5173-2025-06-15-16-14-25.png](https://i.postimg.cc/52PnzCVg/screencapture-localhost-5173-2025-06-15-16-14-25.png)](https://postimg.cc/ZWd8t00v)
 
+## 🖥️ Screenshots
 | Profile Page | Dashboard |
 |--------------|-----------|
-| ![Profile](https://i.imgur.com/8G7VvZl.png) | ![Dashboard](https://i.imgur.com/5XwD9kP.png) |
+| [![Screenshot-2025-06-15-161151.png](https://i.postimg.cc/6qTP7f7d/Screenshot-2025-06-15-161151.png)](https://postimg.cc/rRXj3WNm) | [![Screenshot-2025-06-15-161123.png](https://i.postimg.cc/6pZDLcMc/Screenshot-2025-06-15-161123.png)](https://postimg.cc/fVw2McnS) |
 
-| Themes | Mobile View |
+| Themes | Analytics |
 |--------|-------------|
-| ![Themes](https://i.imgur.com/KmZQl4E.png) | ![Mobile](https://i.imgur.com/9FbQJYr.png) |
+| [![Screenshot-2025-06-15-161231.png](https://i.postimg.cc/mZ6qvJqV/Screenshot-2025-06-15-161231.png)](https://postimg.cc/K4BJLqmg) | [![Screenshot-2025-06-15-161322.png](https://i.postimg.cc/V6fpw8mZ/Screenshot-2025-06-15-161322.png)](https://postimg.cc/PL72b0L1) |
+
+
+## ❤ Themes
+| Emerald | Sky |
+|--------------|-----------|
+| [![Screenshot-2025-06-15-162927.png](https://i.postimg.cc/KcBkwk0Y/Screenshot-2025-06-15-162927.png)](https://postimg.cc/fkWR0Ln4) | [![Screenshot-2025-06-15-163003.png](https://i.postimg.cc/PrMLrGss/Screenshot-2025-06-15-163003.png)](https://postimg.cc/SJJQDvxD) |
+
+| Mid Night | Cosmos Nebula |
+|--------|-------------|
+| [![Screenshot-2025-06-15-162850.png](https://i.postimg.cc/DzN4kqVS/Screenshot-2025-06-15-162850.png)](https://postimg.cc/yJF8038K) | [![Screenshot-2025-06-15-163136.png](https://i.postimg.cc/L6SYp9W3/Screenshot-2025-06-15-163136.png)](https://postimg.cc/yWfYhHsD) |
+
 
 ## 🛠️ Tech Stack
 
@@ -116,8 +129,6 @@ module.exports = {
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📧 Contact
-
-Aakash Gupta - [@aakashdev](https://twitter.com/aakashdev) - aakashgupta.works@gmail.com
 
 Project Link: [https://github.com/aakash-gupta02/LinkStack](https://github.com/aakash-gupta02/LinkStack)
 ```
