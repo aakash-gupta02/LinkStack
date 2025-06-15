@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { applyTheme } from "../utilits/applyTheme";
+import LinkNav from "../components/LinkNav";
 
 const Link2 = () => {
   const { username } = useParams();
@@ -9,7 +10,7 @@ const Link2 = () => {
   const [loading, setLoading] = useState(true);
 
   // const user = {
-    
+
   //   theme: {
   //     bgPage: "#fff7ed",
   //     textPrimary: "#431407",
@@ -44,7 +45,7 @@ const Link2 = () => {
   //     secondary: "#ea580c",
   //     text: "#431407",
   //   },
-    
+
   // };
 
   useEffect(() => {
@@ -92,6 +93,11 @@ const Link2 = () => {
       className="min-h-screen font-sans py-10 px-18"
       style={{ backgroundColor: "var(--bg-page)" }}
     >
+      <div className="absolute top-2 left-2 right-2 z-50 sm:top-4 sm:left-4 sm:right-4">
+  <LinkNav />
+</div>
+
+
       {/* Header with gradient background */}
       <div
         className="relative w-full h-34 rounded-lg overflow-hidden"

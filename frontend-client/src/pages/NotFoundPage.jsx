@@ -6,6 +6,8 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/solid";
 
+import React from "react";
+
 export default function NotFoundPage() {
   return (
     <div className="relative bg-[#0F172A] overflow-hidden  isolate min-h-screen">
@@ -52,7 +54,7 @@ export default function NotFoundPage() {
             User Not Found{" "}
           </h2>
           <p className="mt-6 text-lg leading-8 text-indigo-200 max-w-2xl mx-auto">
-            The page you're looking for has drifted into the void.
+            The Profile you're looking for has not found!!
             <span className="block mt-2 text-indigo-300/80">
               Let's navigate you back home.
             </span>
