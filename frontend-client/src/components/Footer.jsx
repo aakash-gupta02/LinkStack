@@ -1,4 +1,5 @@
 import { XMarkIcon, CodeBracketIcon, ChatBubbleLeftRightIcon, BuildingOffice2Icon, ArrowUpIcon } from "@heroicons/react/24/solid";
+import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const navigation = [
   {
@@ -34,7 +35,7 @@ export default function Footer() {
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:24px_24px] opacity-10" />
       {/* Subtle Glow Effect */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-24 bg-indigo-500/5 blur-3xl" />
-      
+
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {navigation.map((section) => (
@@ -46,7 +47,6 @@ export default function Footer() {
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <a
-                      href={link.href}
                       className="text-sm text-indigo-200 hover:text-indigo-300 transition-colors duration-200"
                     >
                       {link.name}
@@ -56,29 +56,63 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+
+
+          {/* Connect Section */}
           <div>
-            <h3 className="text-base font-semibold text-indigo-100">
-              Connect
-            </h3>
+            <h3 className="text-base font-semibold text-indigo-100">Let's Connect</h3>
+            <p className="mt-4 text-sm text-indigo-200">
+              I'm always interested in new opportunities and collaborations.
+            </p>
             <div className="mt-4 flex space-x-4">
-              {[
-                { icon: XMarkIcon, href: "https://x.com/linkstack" },
-                { icon: CodeBracketIcon, href: "https://github.com/linkstack" },
-                { icon: ChatBubbleLeftRightIcon, href: "https://discord.gg/linkstack" },
-                { icon: BuildingOffice2Icon, href: "https://linkedin.com/company/linkstack" },
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
+              <a
+                href="https://github.com/aakash-gupta02"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
+                aria-label="GitHub"
+              >
+                <FaGithub className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/aakash-gupta-5a337928b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://x.com/AakashG99795"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
+                aria-label="Twitter"
+              >
+                <FaTwitter className="h-5 w-5" />
+              </a>
+              <a
+                href="mailto:aakashgupta052004@gmail.com"
+                className="text-indigo-400 hover:text-indigo-300 transition-colors duration-200"
+                aria-label="Email"
+              >
+                <FaEnvelope className="h-5 w-5" />
+              </a>
+            </div>
+            <div className="mt-6">
+              {/* <Link 
+                to="/resume/preview/689a1c11bbb7bab568b7e203" 
+                className="inline-flex items-center text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition-colors"
+              >
+                <FaFileDownload className="mr-2" />
+                Download My Resume
+              </Link> */}
             </div>
           </div>
+
         </div>
-        
+
         <div className="mt-12 border-t border-indigo-500/30 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-indigo-200">
             © 2025 LinkStack. All rights reserved.

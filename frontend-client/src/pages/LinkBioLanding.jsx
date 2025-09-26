@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavBar from "../components/NavBar";
 import Hero2 from "../components/Hero2";
 import Features from "../components/Features";
@@ -9,6 +9,18 @@ import HorizontalScroll from "../components/HorizontalScroll";
 
 const LinkBioLanding = () => {
   const [scrolled, setScrolled] = useState(false);
+
+  // Create refs for each section
+  const navRef = useRef(null);
+  const heroRef = useRef(null);
+  const featuresRef = useRef(null);
+  const pricingRef = useRef(null);
+  const ctaRef = useRef(null);
+  const footerRef = useRef(null);
+
+  const scrollTo = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,27 +39,42 @@ const LinkBioLanding = () => {
     <div className="bg-white text-gray-800">
       {/* Navigation */}
       <nav
-        className={`w-full fixed top-0 left-0 z-10 py-1 transition-all duration-500 ${
-          scrolled
-            ? "bg-indigo-500/30 backdrop-blur-lg backdrop-saturate-150 border-b border-white/10 shadow-lg"
-            : "bg-transparent"
-        }`}
+        ref={navRef}
+        className={`w-full fixed top-0 left-0 z-10 py-1 transition-all duration-500 ${scrolled
+          ? "bg-indigo-500/30 backdrop-blur-lg backdrop-saturate-150 border-b border-white/10 shadow-lg"
+          : "bg-transparent"
+          }`}
       >
-        <NavBar />
+        <NavBar
+          onNavClick={{
+            heroRef: () => scrollTo(heroRef),
+            featuresRef: () => scrollTo(featuresRef),
+            pricingRef: () => scrollTo(pricingRef),
+            aboutRef: () => scrollTo(ctaRef),
+            footerRef: () => scrollTo(footerRef),
+          }}
+        />
       </nav>
 
-      <Hero2 />
+      <div ref={heroRef}>
+        <Hero2 />
+      </div>
 
-      <Features />
-      {/* <HorizontalScroll /> */}
-      {/* Pricing Section */}
-      <Pricing />
+      <div ref={featuresRef}>
+        <Features />
+      </div>
 
-      {/* CTA Section */}
-      <Cta />
+      <div ref={pricingRef}>
+        <Pricing />
+      </div>
 
-      {/* Footer */}
-      <Footer />
+      <div ref={ctaRef}>
+        <Cta />
+      </div>
+
+      <div ref={footerRef}>
+        <Footer />
+      </div>
     </div>
   );
 };
