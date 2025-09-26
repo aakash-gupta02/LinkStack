@@ -9,5 +9,5 @@ mongoose.connect(MONGOURL).then(()=>{
     console.log("DB CONNECTED");
 }).catch((Error)=>{
     console.log(Error);
-    
+
 })
