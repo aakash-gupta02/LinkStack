@@ -6,13 +6,17 @@ dotenv.config()
 
 export const protect = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1]; // "Bearer TOKEN"
+    const token = req.headers.authorization?.split(" ")[1]; 
 
     if (!token) return res.status(401).json({ message: "Not authorized" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.userId).select("-password");
+    const user2 = await User.findById(decoded.userId).select("-password");
+
     next();
+    
+console.log(user2);
 
     // console.log("Decoded Token: ", decoded);
 
