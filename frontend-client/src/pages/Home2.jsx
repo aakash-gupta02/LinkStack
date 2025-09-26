@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import LinkBioLanding from './LinkBioLanding'
 
 const Home2 = () => {
+  
   return (
     <div>
 

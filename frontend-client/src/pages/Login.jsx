@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // Adjust path as needed
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import Background from "../components/laningPageCompo/Background";
+import { toast } from "react-toastify";
+
 
 export default function Login() {
   const { login } = useAuth();
@@ -33,42 +36,24 @@ export default function Login() {
         ...formData,
       });
 
-      // console.log("login:", res.data);
-
-      const { token, user } = res.data; // e.g., { token: '...', user: {...} }
+      const { token, user } = res.data;
 
       login(token, user);
-
-      // console.log("apna wala console log :", { token, user });
+      toast.success("Login successful!");
 
       navigate("/"); // Redirect on success
     } catch (err) {
+      setGeneralError("Login failed. Please check your credentials.");
       console.log(err);
-      console.log("err.reponse", err.response);
-      console.log("err.response.data", err.response.data);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-[#0F172A] relative overflow-hidden">
+    <div className="min-h-screen flex bg-[#0F172A] relative isolate overflow-hidden">
       {/* Cosmic Background Overlay */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:24px_24px] opacity-10" />
-      {/* Floating Orbs */}
-
-      {[...Array(4)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full bg-indigo-500 blur-xl opacity-40"
-          style={{
-            width: `${Math.random() * 150 + 50}px`,
-            height: `${Math.random() * 150 + 50}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-        />
-      ))}
+      <Background />
 
       {/* Left Side: Login Form */}
       <div className="w-full flex flex-col justify-center items-center p-8">

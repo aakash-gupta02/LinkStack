@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import Background from "../components/laningPageCompo/Background";
+import { toast } from "react-toastify";
+
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -34,12 +37,11 @@ export default function RegisterPage() {
         ...formData
       });
 
-      // console.log("Registered:", res.data);
-      navigate("/"); // Redirect on success
+      navigate("/login");
+      toast.success("Registration successful! Please log in."); 
+      
     } catch (err) {
       console.log(err);
-      console.log("err.reponse", err.response);
-      console.log("err.response.data", err.response.data);
       
       if (err.response && err.response.data) {
         const { message } = err.response.data;
@@ -62,22 +64,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-[#0F172A] relative overflow-hidden px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-[#0F172A] relative overflow-hidden isolate px-4 sm:px-6 lg:px-8">
       {/* Cosmic Background Overlay */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:24px_24px] opacity-10" />
-      {/* Floating Orbs */}
-      {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full bg-indigo-500 blur-xl opacity-40"
-          style={{
-            width: `${Math.random() * 200 + 50}px`,
-            height: `${Math.random() * 200 + 50}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-        />
-      ))}
+      <Background />
 
       {/* Form Section */}
       <div className="w-full max-w-md space-y-6 bg-indigo-900/50 border border-indigo-500/30 rounded-xl p-8 backdrop-blur-sm">
