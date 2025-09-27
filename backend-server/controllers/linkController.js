@@ -1,17 +1,34 @@
 import link from "../models/linkSchema.js";
+import { v2 as cloudinary } from "cloudinary"
 
 export const createLink = async (req, res) => {
-  const user = req.user;
-  const { title, url, thumbnailUrl,description } = req.body;
+console.log("Body:", req.body);
+console.log("File:", req.file);
+
+  const { title, url, description } = req.body;
+  const image = req.file;
+  let imageurl;
+
+
+  if (image) {
+    const uploadedImageUrl = await cloudinary.uploader.upload(image.path, {
+      folder: "LinkStack/links"
+    })
+    imageurl = uploadedImageUrl.secure_url
+
+  } else {
+    return res.status(400).json({ message: "No image file provided" })
+  }
 
   try {
     const newLink = await link.create({
       title,
       url,
-      thumbnailUrl,
+      thumbnailUrl: imageurl,
       description,
       userId: req.user.id,
     });
+
     res.status(201).json(newLink);
   } catch (error) {
     res.status(500).json({ message: "Error creating Link" });
@@ -44,9 +61,11 @@ export const deleteLink = async (req, res) => {
 };
 
 export const updateLink = async (req, res) => {
-    
+
   const { id } = req.params;
-  const { title, url, thumbnailUrl } = req.body;
+  const { title, url } = req.body;
+  const image = req.file;
+  let imageurl;
 
   const findLink = await link.findById(id);
 
@@ -59,15 +78,21 @@ export const updateLink = async (req, res) => {
       return res.status(400).json({ message: "You are not authorized " });
     }
 
+    if (image) {
+      const uploadedImageUrl = await cloudinary.uploader.upload(image.path, {
+        folder: "LinkStack/links"
+      })
+      imageurl = uploadedImageUrl.secure_url
+
+    } 
+
     const updatedLink = await link.findByIdAndUpdate(
       id,
-      { $set: { title, url, thumbnailUrl } },
+      { $set: { title, url, thumbnailUrl: imageurl } },
       { new: true }
     );
 
     res.status(200).json({ message: "Updated successfully", updatedLink });
-
-    res.status(200).json({ message: "Updated successfully", findLink });
   } catch (error) {
     res.status(500).json({ message: "Error Updating link" });
     console.log(error);

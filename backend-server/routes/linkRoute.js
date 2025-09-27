@@ -2,6 +2,7 @@ import express from "express"
 import { createLink, deleteLink, updateLink } from "../controllers/linkController.js"
 import { protect } from "../middleware/authMiddleware.js"
 import Link from "../models/linkSchema.js"
+import { mediaUpload } from "../middleware/multerCloudinary.js"
 
 const router = express.Router()
 
@@ -18,9 +19,9 @@ router.get('/l/:linkId', async (req, res) => {
 });
 
 
-router.post("/create",protect, createLink)
+router.post("/create",protect, mediaUpload, createLink)
 router.delete("/delete/:id", protect, deleteLink)
-router.patch("/update/:id", protect, updateLink)
+router.patch("/update/:id", protect, mediaUpload, updateLink)
 
 
 
