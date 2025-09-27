@@ -4,6 +4,9 @@ import AnalyticsChart from "./AnalyticsChart";
 
 const AnalyticsDashboard = () => {
   const { user, links, analytics } = useAnalytics();
+  
+
+
   return (
     <div>
       <div className="mb-8">
@@ -69,8 +72,8 @@ const AnalyticsDashboard = () => {
                 <p className="text-2xl font-bold text-gray-800">
                   {analytics.totalClicks > 0
                     ? `${Math.round(
-                        (analytics.totalClicks / analytics.profileViews) * 100
-                      )}%`
+                      (analytics.totalClicks / analytics.profileViews) * 100
+                    )}%`
                     : "0%"}
                 </p>
                 <p className="text-sm text-red-600">-2.1%</p>
@@ -99,74 +102,91 @@ const AnalyticsDashboard = () => {
           <h2 className="text-xl font-bold text-gray-800 mb-6">
             Top Performing Links
           </h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  {["Link", "Clicks", "CTR", "Created Date"].map((header) => (
-                    <th
-                      key={header}
-                      className="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {links
-                  .sort((a, b) => b.clicks - a.clicks)
-                  .slice(0, 5)
-                  .map((link) => (
-                    <tr key={link._id}>
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          {link.thumbnailUrl ? (
-                            <img
-                              src={link.thumbnailUrl}
-                              alt={link.title}
-                              className="w-8 h-8 rounded-full object-cover mr-3"
-                            />
-                          ) : (
-                            <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3">
-                              <i className="fas fa-link"></i>
-                            </div>
-                          )}
-                          <div>
-                            <p className="font-medium text-gray-800">
-                              {link.title}
-                            </p>
-                            <p className="text-xs text-gray-500 truncate max-w-xs">
-                              {link.url}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div className="text-gray-800 font-medium">
-                          {link.clicks.toLocaleString()}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div className="text-gray-800 font-medium">
-                          {analytics.profileViews > 0
-                            ? `${Math.round(
-                                (link.clicks / analytics.profileViews) * 100
-                              )}%`
-                            : "0%"}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div className="text-gray-500 text-sm">
-                          {new Date(link.createdAt).toLocaleDateString()}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+
+          {/* Header row - hidden on mobile */}
+          <div className="hidden md:grid grid-cols-4 gap-4 px-2 pb-2 border-b border-gray-100">
+            <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Link</div>
+            <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Clicks</div>
+            <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">CTR</div>
+            <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Created Date</div>
+          </div>
+
+          {/* List */}
+          <div className="flex flex-col divide-y divide-gray-100">
+            {links
+              .sort((a, b) => b.clicks - a.clicks)
+              .slice(0, 5)
+              .map((link) => (
+                <div
+                  key={link.id}
+                  className="flex flex-col md:grid md:grid-cols-4 gap-4 py-4"
+                >
+                  {/* Link */}
+                  <div className="flex items-center">
+                    {link.thumbnailUrl ? (
+                      <img
+                        src={link.thumbnailUrl}
+                        alt={link.title}
+                        className="w-10 h-10 rounded-full object-cover mr-3"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3">
+                        <i className="fas fa-link"></i>
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-medium text-gray-800">{link.title}</p>
+                      {/* Show URL only on mobile */}
+                      {/* <p className="text-xs text-gray-500 truncate md:hidden">{link.url}</p> */}
+                    </div>
+                  </div>
+
+                  {/* Mobile-friendly row items */}
+                  <div className="flex justify-between w-full text-sm text-gray-700 md:hidden">
+                    <span className="font-medium">Clicks:</span> {link.clicks}
+                  </div>
+
+                  <div className="flex justify-between w-full text-sm text-gray-700 md:hidden">
+                    <span className="font-medium">CTR:</span>{" "}
+                    {analytics.profileViews > 0
+                      ? `${Math.round((link.clicks / analytics.profileViews) * 100)}%`
+                      : "0%"}
+                  </div>
+
+                  <div className="flex justify-between w-full text-sm text-gray-500 md:hidden">
+                    <span className="font-medium">Date:</span>{" "}
+                    {link.createdAt
+                      ? new Date(link.createdAt).toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })
+                      : "-"}
+                  </div>
+
+                  {/* Desktop-only cells */}
+                  <div className="hidden md:block text-gray-800 font-medium">
+                    {link.clicks}
+                  </div>
+                  <div className="hidden md:block text-gray-800 font-medium">
+                    {analytics.profileViews > 0
+                      ? `${Math.round((link.clicks / analytics.profileViews) * 100)}%`
+                      : "0%"}
+                  </div>
+                  <div className="hidden md:block text-gray-500 text-sm">
+                    {link.createdAt
+                      ? new Date(link.createdAt).toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })
+                      : "-"}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
+
       </div>
     </div>
   );
