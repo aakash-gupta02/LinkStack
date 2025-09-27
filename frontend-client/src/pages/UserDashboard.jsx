@@ -16,16 +16,38 @@ const UserDashboard = () => {
 
   const { user } = useAnalytics();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [activeMenu]);
+
   return (
     <div className="flex h-screen bg-gray-50">
+      {/* Sidebar Overlay for Mobile */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 bg-opacity-30 z-30 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full">
+      <div
+        className={`
+          fixed z-40 top-0 left-0 h-full w-64 bg-white border-r border-gray-200 flex flex-col
+          transform transition-transform duration-200 ease-in-out
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0 md:static md:z-auto
+        `}
+      >
         <div className="h-16 flex items-center px-6 border-b border-gray-200">
           <h1
             onClick={() => {
               naviagte("/");
+              setIsSidebarOpen(false);
             }}
-            className="text-xl font-bold text-indigo-600 cursor-pointer "
+            className="text-xl font-bold text-indigo-600 cursor-pointer"
           >
             LinkStack
           </h1>
@@ -43,7 +65,10 @@ const UserDashboard = () => {
             ].map((menu) => (
               <button
                 key={menu}
-                onClick={() => setActiveMenu(menu)}
+                onClick={() => {
+                  setActiveMenu(menu);
+                  setIsSidebarOpen(false);
+                }}
                 className={`flex items-center px-4 py-3 w-full text-left rounded-lg ${
                   activeMenu === menu
                     ? "bg-indigo-50 text-indigo-600"
@@ -67,12 +92,10 @@ const UserDashboard = () => {
                       : "question-circle"
                   } mr-3`}
                 ></i>
-
                 <span>
                   {menu.charAt(0).toUpperCase() +
                     menu.slice(1).replace("-", " ")}
                 </span>
-                
               </button>
             ))}
           </nav>
@@ -81,6 +104,7 @@ const UserDashboard = () => {
           <button
             onClick={() => {
               naviagte("/");
+              setIsSidebarOpen(false);
             }}
             className="flex items-center px-4 py-2 w-full text-left text-indigo-600 rounded-lg hover:bg-indigo-50 cursor-pointer whitespace-nowrap"
           >
@@ -91,10 +115,18 @@ const UserDashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 ml-64 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col min-h-screen ">
         
         {/* Top Navbar */}
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-10">
+        <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-20">
+          {/* Sidebar Toggle Button for Mobile */}
+          <button
+            className="md:hidden mr-2 text-gray-600 focus:outline-none"
+            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            aria-label="Open sidebar"
+          >
+            <i className="fas fa-bars text-2xl"></i>
+          </button>
           <div>
             <h2 className="text-lg font-medium text-gray-800">
               Welcome back, {user.name}
@@ -142,22 +174,15 @@ const UserDashboard = () => {
         </header>
 
         {/* Dashboard Content */}
-        <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto bg-gray-50">
           {activeMenu === "dashboard" && <DashDAshboard />}
-
           {activeMenu === "profile" && <ProfileDashboard />}
-
           {activeMenu === "links" && <LinksDashboard />}
-
           {activeMenu === "analytics" && <AnalyticsDashboard />}
-
           {activeMenu === "theme" && <ThemeDashboard />}
-
           {activeMenu === "layout" && <LayoutCustomizer />}
-
-          {activeMenu == "support" && <SupportPage />}
+          {activeMenu === "support" && <SupportPage />}
         </main>
-
       </div>
     </div>
   );
