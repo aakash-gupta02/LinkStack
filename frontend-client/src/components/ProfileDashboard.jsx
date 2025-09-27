@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useAnalytics } from "../context/AnalyticsContext";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import {
   FaGithub,
@@ -10,6 +9,7 @@ import {
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
+import API from "../utilits/API";
 
 const ProfileDashboard = () => {
   const { user, links, analytics } = useAnalytics();
@@ -52,15 +52,10 @@ const ProfileDashboard = () => {
     setSuccess(false);
 
     try {
-      const response = await axios.patch(
-        `https://linkstack-wjl6.onrender.com/api/auth/update/${currentUser.id}`,
+      const response = await API.patch(
+        `/api/auth/update/${currentUser.id}`,
         formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
+
       );
 
       if (response.data.success) {

@@ -5,10 +5,10 @@ import Home2 from "./pages/Home2";
 import RegisterPage from "./pages/Register";
 import Login from "./pages/Login";
 import UserDashboard from "./pages/UserDashboard";
-import ProtectedRoute from "./components/ProtectedRoute"; // Adjust path accordingly
+import ProtectedRoute from "./components/ProtectedRoute"; 
 import Link2 from "./pages/Link2";
 import NotFoundPage from "./pages/NotFoundPage";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   return (

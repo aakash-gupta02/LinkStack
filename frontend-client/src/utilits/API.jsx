@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://linkstack-wjl6.onrender.com",
-//   baseURL: "http://localhost:3000",
+  // baseURL: "https://linkstack-wjl6.onrender.com",
+  baseURL: "http://localhost:3000",
 
   headers: {
     "Content-Type": "application/json",

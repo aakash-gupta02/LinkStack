@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { useAuth } from "./AuthContext"; // assumes you're storing token/user here
+import API from "../utilits/API";
 
 const AnalyticsContext = createContext();
 
@@ -13,17 +13,8 @@ export const AnalyticsProvider = ({ children }) => {
   const fetchAnalytics = async () => {
     try {
       setLoading(true);
-    //   const res = await axios.get(`/api/analytics/${user?._id}`, {
-
-      const res = await axios.get(`https://linkstack-wjl6.onrender.com/analytics`, { 
-
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      const res = await API.get(`/analytics`);
       const fullData = res.data;
-      // console.log(res);
       
       const {
         user: userData,

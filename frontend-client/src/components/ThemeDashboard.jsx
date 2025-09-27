@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useAnalytics } from "../context/AnalyticsContext";
 import { presetThemes } from "../assets/PresetThemes";
+import API from "../utilits/API";
+import { toast } from "react-toastify";
+
 
 const ThemeDashboard = () => {
   const [selectedTheme, setSelectedTheme] = useState(null);
@@ -91,7 +93,6 @@ const ThemeDashboard = () => {
     let themeToSave;
 
     if (activeThemeIndex === presetThemes.length - 1) {
-      // If custom theme is selected, use customTheme
       themeToSave = customTheme;
     } else {
       // Otherwise use selectedTheme
@@ -102,23 +103,17 @@ const ThemeDashboard = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.patch(
-        `https://linkstack-wjl6.onrender.com/api/auth/updatetheme/${currentUser.id}`,
+      const response = await API.patch(
+        `/api/auth/updatetheme/${currentUser.id}`,
         { theme: themeToSave },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
       );
 
       // Update user context with new theme
       updateUser({ ...currentUser, theme: themeToSave });
-      alert("Theme saved successfully!");
+      toast.success("Theme saved successfully!");
     } catch (error) {
       console.error("Error saving theme:", error);
-      alert("Failed to save theme");
+      toast.error("Failed to save theme");
     } finally {
       setIsLoading(false);
     }

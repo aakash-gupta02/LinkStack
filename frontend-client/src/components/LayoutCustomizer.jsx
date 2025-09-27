@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useAnalytics } from "../context/AnalyticsContext";
+import API from "../utilits/API";
+import { toast } from "react-toastify";
 
 const LayoutDashboard = () => {
   const { user } = useAnalytics();
@@ -130,22 +131,17 @@ const LayoutDashboard = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.patch(
-        `https://linkstack-wjl6.onrender.com/api/auth/updatelayout/${currentUser.id}`,
+      const response = await API.patch(
+        `/api/auth/updatelayout/${currentUser.id}`,
         { layout: layoutToSave },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      
       );
 
       updateUser({ ...currentUser, layout: layoutToSave });
-      alert("Layout saved successfully!");
+      toast.success("Layout saved successfully!");
     } catch (error) {
       console.error("Error saving layout:", error);
-      alert("Failed to save layout");
+      toast.error("Failed to save layout");
     } finally {
       setIsLoading(false);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import NotFoundPage from "./NotFoundPage";
+import API from "../utilits/API";
 
 const UserLinksPage = () => {
   const { username } = useParams();
@@ -11,7 +11,7 @@ const UserLinksPage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`https://linkstack-wjl6.onrender.com/${username}`);
+        const res = await API.get(`/user-link/${username}`);
         setProfile(res.data.profile);
       } catch (err) {
         console.error("Error fetching profile:", err);

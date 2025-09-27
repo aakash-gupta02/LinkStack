@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useAnalytics } from "../context/AnalyticsContext";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
+import API from "../utilits/API";
+import { toast } from "react-toastify";
 
 const LinksDashboard = () => {
   const { links, rawData, fetchData, refreshAnalytics } = useAnalytics();
@@ -43,63 +44,49 @@ const LinksDashboard = () => {
   // Create new link
   const handleCreate = async () => {
     try {
-      await axios.post("https://linkstack-wjl6.onrender.com/api/link/create", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await API.post("/api/link/create", formData);
       // fetchData(); // Refresh links
       refreshAnalytics();
 
       setIsCreateModalOpen(false);
       setFormData({ title: "", url: "", description: "", thumbnailUrl: "" });
+      toast.success("Link created successfully!");
     } catch (error) {
       console.error("Create error:", error);
+      toast.error("Failed to create link. Please try again.");
     }
   };
 
   // Edit link
   const handleEdit = async () => {
     try {
-      await axios.patch(
-        `https://linkstack-wjl6.onrender.com/api/link/update/${currentLink.id}`,
+      await API.patch(
+        `/api/link/update/${currentLink.id}`,
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+  
       );
-      // fetchData(); // Refresh links
 
       setIsEditModalOpen(false);
       refreshAnalytics();
+      toast.success("Link updated successfully!");
 
     } catch (error) {
       console.error("Update error:", error);
+      toast.error("Failed to update link. Please try again.");
     }
   };
 
   // Delete link
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `https://linkstack-wjl6.onrender.com/api/link/delete/${currentLink}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      // console.log("cureent link", currentLink);
-
-      // fetchData(); // Refresh links
+      await API.delete(`/api/link/delete/${currentLink}`);
       setIsDeleteModalOpen(false);
       refreshAnalytics();
+      toast.success("Link deleted successfully!");
 
     } catch (error) {
       console.error("Delete error:", error);
+      toast.error("Failed to delete link. Please try again.");
     }
   };
 
