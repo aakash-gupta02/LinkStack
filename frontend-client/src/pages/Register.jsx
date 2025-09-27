@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import Background from "../components/laningPageCompo/Background";
 import { toast } from "react-toastify";
+import API from "../utilits/API";
 
 
 export default function RegisterPage() {
@@ -33,7 +34,7 @@ export default function RegisterPage() {
     setGeneralError('');
 
     try {
-      const res = await axios.post("https://linkstack-wjl6.onrender.com/api/auth/register", {
+      const res = await API.post("/api/auth/register", {
         ...formData
       });
 

@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext"; // Adjust path as needed
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import Background from "../components/laningPageCompo/Background";
 import { toast } from "react-toastify";
+import API from "../utilits/API";
 
 
 export default function Login() {
@@ -32,7 +33,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://linkstack-wjl6.onrender.com/api/auth/login", {
+      const res = await API.post("/api/auth/login", {
         ...formData,
       });
 
