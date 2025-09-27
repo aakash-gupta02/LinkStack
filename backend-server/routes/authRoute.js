@@ -1,6 +1,7 @@
 import express from "express"
 import { registerUser, loginUser, getAllUsers, getUserProfile, deleteUser, updateUser, updateUserTheme } from "../controllers/authController.js";
 import { protect } from "../middleware/authMiddleware.js";
+import { mediaUpload } from "../middleware/multerCloudinary.js"
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.get("/all", getAllUsers)
 router.get("/profile",protect, getUserProfile)
 
 router.delete("/delete/:id", protect, deleteUser)
-router.patch("/update/:id", protect, updateUser)
+router.patch("/update/:id", protect, mediaUpload, updateUser)
 router.patch("/updatetheme/:id", protect, updateUserTheme)
 
 

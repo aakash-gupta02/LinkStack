@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import dotenv from "dotenv";
 import { protect } from "../middleware/authMiddleware.js";
+import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
 
@@ -97,74 +98,53 @@ export const loginUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const userId = req.user._id; // Assuming you have auth middleware setting req.user
-    const { username, ...otherFields } = req.body;
+    const userId = req.params.id || req.user._id; 
+    const { name, username, bio, socialLinks } = req.body;
+    const image = req.file;
+    let imageUrl;
 
-    // 1. Check if username is being updated and if it's available
-    if (username) {
-      const userExists = await User.findOne({ 
-        username,
-        _id: { $ne: userId } // Check other users with same username
+    // Find the user
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Security check: only the user themselves can update
+    if (user._id.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "You are not authorized to update this profile" });
+    }
+
+    // Check if username is already taken
+    if (username && username !== user.username) {
+      const exists = await User.findOne({ username, _id: { $ne: userId } });
+      if (exists) return res.status(400).json({ message: "Username already taken" });
+    }
+
+    // Upload image if provided
+    if (image) {
+      const uploaded = await cloudinary.uploader.upload(image.path, {
+        folder: "LinkStack/profile",
       });
-
-      if (userExists) {
-        return res.status(400).json({ message: "Username already taken" });
-      }
+      imageUrl = uploaded.secure_url;
     }
 
-    // 2. Create update object with only provided fields
-    const updateObj = {};
-    const allowedFields = ['name', 'username', 'bio', 'profilePicture', 'socialLinks'];
-    
-    allowedFields.forEach(field => {
-      if (req.body[field] !== undefined) { // Only add if field exists in request
-        updateObj[field] = req.body[field];
-      }
-    });
+    // Build update object
+    const updateObj = {
+      ...(name && { name }),
+      ...(username && { username }),
+      ...(bio && { bio }),
+      ...(socialLinks && { socialLinks }),
+      ...(imageUrl && { profilePicture: imageUrl }),
+    };
 
-    // 3. Update only if there are valid fields to update
-    if (Object.keys(updateObj).length === 0) {
-      return res.status(400).json({ message: "No valid fields provided for update" });
-    }
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(userId, { $set: updateObj }, { new: true, select: "-password -__v" });
 
-    // 4. Perform the update
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $set: updateObj },
-      { 
-        new: true,
-        runValidators: true, // Validate updated fields
-        select: '-password -__v' // Exclude sensitive/uneeded fields
-      }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Profile updated successfully",
-      user: updatedUser
-    });
-
+    res.status(200).json({ message: "Profile updated successfully", updatedUser });
   } catch (err) {
-    console.error('Update error:', err);
-    
-    // Handle Mongoose validation errors
-    if (err.name === 'ValidationError') {
-      return res.status(400).json({
-        success: false,
-        message: Object.values(err.errors).map(val => val.message)[0]
-      });
-    }
-
-    res.status(500).json({
-      success: false,
-      message: "Server error during profile update"
-    });
+    console.error(err);
+    res.status(500).json({ message: "Error updating profile" });
   }
 };
+
 
 export const updateUserTheme = async (req, res) => {
   try {
@@ -258,6 +238,6 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-export const getUsernLink = async(req, res)=>{
-  
+export const getUsernLink = async (req, res) => {
+
 }
