@@ -50,7 +50,7 @@ const LinkNav = ({onNavClick}) => {
     {
       icon: <Squares2X2Icon className="h-5 w-5 text-indigo-400" />,
       text: "Dashboard",
-      action: () => navigate("/dashboard"),
+      action: () => navigate("/link/dashboard"),
     },
     {
       icon: <ArrowRightStartOnRectangleIcon className="h-5 w-5 text-red-400" />,
