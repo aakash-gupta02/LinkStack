@@ -177,8 +177,8 @@ const Link2 = () => {
                 key={index}
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`http://localhost:3000/api/link/l/${link._id}`}
-                // href={`https://linkstack-wjl6.onrender.com/l/${link._id}`}
+                // href={`http://localhost:3000/api/link/l/${link._id}`}
+                href={`https://linkstack-wjl6.onrender.com/l/${link._id}`}
                 className="block rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer whitespace-nowrap"
                 style={{
                   backgroundColor: "var(--link-card-bg)",
