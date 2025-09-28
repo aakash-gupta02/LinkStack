@@ -53,7 +53,7 @@ const Link2 = () => {
       try {
         const res = await API.get(`/user-link/${username}`);
         setProfile(res.data.profile);
-        
+
       } catch (err) {
         console.error("Error fetching profile:", err);
       } finally {
@@ -94,9 +94,7 @@ const Link2 = () => {
       className="min-h-screen font-sans py-10 px-18"
       style={{ backgroundColor: "var(--bg-page)" }}
     >
-      {/* <div className="absolute top-2 left-2 right-2 z-50 sm:top-4 sm:left-4 sm:right-4">
-  <LinkNav />
-</div> */}
+
 
 
       {/* Header with gradient background */}
@@ -107,7 +105,7 @@ const Link2 = () => {
             "linear-gradient(to bottom right, var(--header-gradient-start), var(--header-gradient-end))",
         }}
       >
-        <LinkNav/>
+        <LinkNav />
       </div>
 
       {/* Main content container */}
@@ -147,38 +145,40 @@ const Link2 = () => {
           </p>
 
           <div className="flex justify-center space-x-4 mt-6">
-            {Object.entries(profile.socialLinks).map(([platform, url]) => {
-              const { icon, color } = socialIcons[platform] || {
-                icon: "fas fa-external-link-alt",
-                color: "text-[var(--social-default)]",
-              };
+            {Object.entries(profile.socialLinks).filter(([platform, url]) => url && url.trim().length > 0)
+              .map(([platform, url], index) => {
+                const { icon, color } = socialIcons[platform] || {
+                  icon: "fas fa-external-link-alt",
+                  color: "text-[var(--social-default)]",
+                };
 
-              return (
-                <a
-                  key={platform}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
-                  style={{ backgroundColor: "var(--social-bg)" }}
-                  aria-label={`Visit ${platform} profile`}
-                >
-                  <i className={`${icon} ${color} text-lg`}></i>
-                </a>
-              );
-            })}
+                return (
+                  <a
+                    key={index}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 cursor-pointer"
+                    style={{ backgroundColor: "var(--social-bg)" }}
+                    aria-label={`Visit ${platform} profile`}
+                  >
+                    <i className={`${icon} ${color} text-lg`}></i>
+                  </a>
+                );
+              })}
           </div>
         </div>
 
         <div className="mt-10 space-y-4 pb-20">
           {profile.links
             .filter((link) => link.isVisible)
-            .map((link) => (
+            .map((link, index) => (
               <a
-                key={link.id}
+                key={index}
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`https://linkstack-wjl6.onrender.com/l/${link._id}`}
+                href={`http://localhost:3000/api/link/l/${link._id}`}
+                // href={`https://linkstack-wjl6.onrender.com/l/${link._id}`}
                 className="block rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer whitespace-nowrap"
                 style={{
                   backgroundColor: "var(--link-card-bg)",
