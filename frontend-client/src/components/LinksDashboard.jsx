@@ -11,6 +11,7 @@ const LinksDashboard = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [thumbnailFile, setThumbnailFile] = useState(null);
 
   const [currentLink, setCurrentLink] = useState(null);
 
@@ -39,17 +40,37 @@ const LinksDashboard = () => {
     }
   };
 
+  // Update handleChange to handle file input
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    setThumbnailFile(file);
 
-  // Create new link
+    // For preview, optional:
+    setFormData((prev) => ({
+      ...prev,
+      thumbnailUrl: URL.createObjectURL(file),
+    }));
+  };
+
+  // Update handleCreate and handleEdit to use FormData
   const handleCreate = async () => {
     try {
-      await API.post("/api/link/create", formData);
-      // fetchData(); // Refresh links
-      refreshAnalytics();
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key !== "thumbnailUrl") data.append(key, formData[key]);
+      });
+      if (thumbnailFile) data.append("media", thumbnailFile);
 
+      await API.post("/api/link/create", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      refreshAnalytics();
       setIsCreateModalOpen(false);
       setFormData({ title: "", url: "", description: "", thumbnailUrl: "" });
+      setThumbnailFile(null);
       toast.success("Link created successfully!");
     } catch (error) {
       console.error("Create error:", error);
@@ -57,24 +78,28 @@ const LinksDashboard = () => {
     }
   };
 
-  // Edit link
   const handleEdit = async () => {
     try {
-      await API.patch(
-        `/api/link/update/${currentLink.id}`,
-        formData,
-  
-      );
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key !== "thumbnailUrl") data.append(key, formData[key]);
+      });
+      if (thumbnailFile) data.append("media", thumbnailFile);
+
+      await API.patch(`/api/link/update/${currentLink.id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setIsEditModalOpen(false);
       refreshAnalytics();
+      setThumbnailFile(null);
       toast.success("Link updated successfully!");
-
     } catch (error) {
       console.error("Update error:", error);
       toast.error("Failed to update link. Please try again.");
     }
   };
+
 
   // Delete link
   const handleDelete = async () => {
@@ -216,9 +241,12 @@ const LinksDashboard = () => {
           title="Create New Link"
           formData={formData}
           handleChange={handleChange}
+          handleFileChange={handleFileChange}
           onSubmit={handleCreate}
-          onClose={() => setIsCreateModalOpen(false)}
-        />
+          onClose={() => {
+            setIsCreateModalOpen(false)
+            setFormData({ title: "", url: "", description: "", media: "" })
+          }} />
       )}
 
       {/* Edit Link Modal */}
@@ -227,8 +255,12 @@ const LinksDashboard = () => {
           title="Edit Link"
           formData={formData}
           handleChange={handleChange}
+          handleFileChange={handleFileChange}
           onSubmit={handleEdit}
-          onClose={() => setIsEditModalOpen(false)}
+          onClose={() => {
+            setIsEditModalOpen(false)
+            setFormData({ title: "", url: "", description: "", media: "" })
+          }}
         />
       )}
 
@@ -261,7 +293,7 @@ const LinksDashboard = () => {
   );
 };
 
-const LinkModal = ({ title, formData, handleChange, onSubmit, onClose }) => {
+const LinkModal = ({ title, formData, handleChange, handleFileChange, onSubmit, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
@@ -318,20 +350,28 @@ const LinkModal = ({ title, formData, handleChange, onSubmit, onClose }) => {
 
           </div>
 
+
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-600 mb-1">
-              Thumbnail URL
+              Thumbnail
             </label>
             <input
-              type="url"
-              name="thumbnailUrl"
-              placeholder="Thumbnail URL here!....."
-
-              value={formData.thumbnailUrl}
-              onChange={handleChange}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
               className="w-full px-4 py-2 border border-indigo-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
+            {formData.thumbnailUrl && (
+              <img
+                src={formData.thumbnailUrl}
+                alt="Thumbnail Preview"
+                className="mt-2 w-32 h-20 object-cover rounded-lg border border-gray-200"
+              />
+            )}
           </div>
+
+
+
         </div>
 
         <div className="flex justify-end mt-8 space-x-4">
