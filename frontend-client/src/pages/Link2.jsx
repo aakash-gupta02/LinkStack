@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { applyTheme } from "../utilits/applyTheme";
 import LinkNav from "../components/LinkNav";
+import API from "../utilits/API";
 
 const Link2 = () => {
   const { username } = useParams();

@@ -98,7 +98,7 @@ export const loginUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const userId = req.params.id || req.user._id; 
+    const userId = req.params.id || req.user._id;
     const { name, username, bio, socialLinks } = req.body;
     const image = req.file;
     let imageUrl;
@@ -118,6 +118,12 @@ export const updateUser = async (req, res) => {
       if (exists) return res.status(400).json({ message: "Username already taken" });
     }
 
+  if (req.body.socialLinks && typeof req.body.socialLinks === "string") {
+      req.body.socialLinks = JSON.parse(req.body.socialLinks);
+}
+
+
+
     // Upload image if provided
     if (image) {
       const uploaded = await cloudinary.uploader.upload(image.path, {
@@ -127,13 +133,13 @@ export const updateUser = async (req, res) => {
     }
 
     // Build update object
-    const updateObj = {
-      ...(name && { name }),
-      ...(username && { username }),
-      ...(bio && { bio }),
-      ...(socialLinks && { socialLinks }),
-      ...(imageUrl && { profilePicture: imageUrl }),
-    };
+const updateObj = {
+  ...(name && { name }),
+  ...(username && { username }),
+  ...(bio && { bio }),
+  ...(req.body.socialLinks && { socialLinks: req.body.socialLinks }),
+  ...(imageUrl && { profilePicture: imageUrl }),
+};
 
     // Update user
     const updatedUser = await User.findByIdAndUpdate(userId, { $set: updateObj }, { new: true, select: "-password -__v" });
