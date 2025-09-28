@@ -1,9 +1,8 @@
+import { uploadToCloudinary } from "../middleware/multerCloudinary.js";
 import link from "../models/linkSchema.js";
 import { v2 as cloudinary } from "cloudinary"
 
 export const createLink = async (req, res) => {
-console.log("Body:", req.body);
-console.log("File:", req.file);
 
   const { title, url, description } = req.body;
   const image = req.file;
@@ -11,10 +10,8 @@ console.log("File:", req.file);
 
 
   if (image) {
-    const uploadedImageUrl = await cloudinary.uploader.upload(image.path, {
-      folder: "LinkStack/links"
-    })
-    imageurl = uploadedImageUrl.secure_url
+    const uploaded = await uploadToCloudinary(req.file.buffer, "LinkStack/links");
+    imageurl = uploaded.secure_url;
 
   } else {
     return res.status(400).json({ message: "No image file provided" })
@@ -79,12 +76,10 @@ export const updateLink = async (req, res) => {
     }
 
     if (image) {
-      const uploadedImageUrl = await cloudinary.uploader.upload(image.path, {
-        folder: "LinkStack/links"
-      })
-      imageurl = uploadedImageUrl.secure_url
+      const uploaded = await uploadToCloudinary(req.file.buffer, "LinkStack/links");
+      imageurl = uploaded.secure_url;
 
-    } 
+    }
 
     const updatedLink = await link.findByIdAndUpdate(
       id,

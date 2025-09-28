@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import dotenv from "dotenv";
 import { protect } from "../middleware/authMiddleware.js";
 import { v2 as cloudinary } from "cloudinary";
+import { uploadToCloudinary } from "../middleware/multerCloudinary.js";
 
 dotenv.config();
 
@@ -118,28 +119,27 @@ export const updateUser = async (req, res) => {
       if (exists) return res.status(400).json({ message: "Username already taken" });
     }
 
-  if (req.body.socialLinks && typeof req.body.socialLinks === "string") {
+    if (req.body.socialLinks && typeof req.body.socialLinks === "string") {
       req.body.socialLinks = JSON.parse(req.body.socialLinks);
-}
+    }
 
 
 
     // Upload image if provided
     if (image) {
-      const uploaded = await cloudinary.uploader.upload(image.path, {
-        folder: "LinkStack/profile",
-      });
+
+      const uploaded = await uploadToCloudinary(req.file.buffer, "LinkStack/profile");
       imageUrl = uploaded.secure_url;
     }
 
     // Build update object
-const updateObj = {
-  ...(name && { name }),
-  ...(username && { username }),
-  ...(bio && { bio }),
-  ...(req.body.socialLinks && { socialLinks: req.body.socialLinks }),
-  ...(imageUrl && { profilePicture: imageUrl }),
-};
+    const updateObj = {
+      ...(name && { name }),
+      ...(username && { username }),
+      ...(bio && { bio }),
+      ...(req.body.socialLinks && { socialLinks: req.body.socialLinks }),
+      ...(imageUrl && { profilePicture: imageUrl }),
+    };
 
     // Update user
     const updatedUser = await User.findByIdAndUpdate(userId, { $set: updateObj }, { new: true, select: "-password -__v" });

@@ -1,38 +1,30 @@
 import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from "cloudinary";
-import dotenv from "dotenv";
+import streamifier from "streamifier";
+import dotenv from "dotenv"; dotenv.config(); 
 
-dotenv.config();
-
-cloudinary.config({
+cloudinary.config({ 
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "LinkStack",
-    resource_type: "image",
-    allowed_formats: ["jpg", "jpeg", "png", "gif"],
-  },
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error("Unsupported file type"));
-  }
-};
-
+const storage = multer.memoryStorage();
 export const mediaUpload = multer({
   storage,
-  fileFilter,
   limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
+    cb(null, allowed.includes(file.mimetype));
+  },
 }).single("media");
 
-
+export const uploadToCloudinary = (fileBuffer, folder = "LinkStack") => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder },
+      (err, result) => (err ? reject(err) : resolve(result))
+    );
+    streamifier.createReadStream(fileBuffer).pipe(stream);
+  });
+};

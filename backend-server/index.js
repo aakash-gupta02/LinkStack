@@ -7,7 +7,7 @@ import authRoutes from "../backend-server/routes/authRoute.js";
 import linkRoutes from "../backend-server/routes/linkRoute.js";
 import profileRoutes from "../backend-server/routes/profileRoutes.js";
 import analyticsRoutes from "../backend-server/routes/analyticsRoutes.js";
-import { mediaUpload } from "./middleware/multerCloudinary.js";
+import { mediaUpload, uploadToCloudinary } from "./middleware/multerCloudinary.js";
 
 const app = express();
 dotenv.config();
@@ -28,10 +28,8 @@ app.post("/upload/test-upload", mediaUpload, async (req, res) => {
     console.log(text);
 
     if (image) {
-      const uploadedImageUrl = await cloudinary.uploader.upload(image.path, {
-        folder: "LinkStack/test"
-      });
-      imageurl = uploadedImageUrl.secure_url;
+      const uploaded = await uploadToCloudinary(req.file.buffer, "LinkStack/profile");
+      imageurl = uploaded.secure_url;
       console.log(imageurl);
     } else {
       return res.status(400).json({ message: "No image file provided" });
